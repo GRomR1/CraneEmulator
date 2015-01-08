@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Кран_ВидСверху.svg</file>
+        <file>Кран_ВидCбоку.svg</file>
+    </qresource>
+</RCC>
