@@ -17,6 +17,8 @@
 #include "OtherItem.h"
 #include "LeftCrutchItem.h"
 #include "RightCrutchItem.h"
+#include "EllipseOutriggerItem.h"
+#include "EllipseHookItem.h"
 
 namespace Ui {
 class Widget;
@@ -82,6 +84,14 @@ private slots:
 
     void on__verticalSliderTelescopic_sliderReleased();
 
+    void on__pushButtonPillarPlus_clicked();
+
+    void on__pushButtonPillarMinus_clicked();
+
+    void on__verticalSliderPillar_sliderReleased();
+
+    void drawPoint(QPointF p);
+
 private:
     Ui::Widget *ui;
     LeftCrutchItem *_leftCrutch;
@@ -94,8 +104,8 @@ private:
     HookItem *_hook;
 
     OtherItem *_ellipseDerrick;
-    OtherItem *_ellipseOutrigger;
-    OtherItem *_ellipseHook;
+    EllipseOutriggerItem *_ellipseOutrigger;
+    EllipseHookItem *_ellipseHook;
     OtherItem *_ground;
 
     GraphicsScene *_scene;

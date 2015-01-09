@@ -2,6 +2,7 @@
 #define ROPEHOOKITEM_H
 
 #include "AbstractItem.h"
+#include "EllipseHookItem.h"
 
 class RopeHookItem : public AbstractItem
 {
@@ -21,20 +22,27 @@ public:
         Q_UNUSED(v);
         //TODO продумать максимальное состояние троса
     }
-
-protected:
-    virtual QVariant itemChange(GraphicsItemChange change, const QVariant & value);
-
-public slots:
-    //служит для обработки изменения состояния у объектов-предков
-    //отправляет сигнал signalItemChanged
-    void slotItemChanged(GraphicsItemChange change);
-    void slotRotationChanged();
+    virtual void setParentItemMy(AbstractItem *item);
 
 public slots:
     virtual void increment();
     virtual void decrement();
 
+signals:
+    void scaledChanged(qreal value);
+    void rotationChanged(qreal value);
+    void translateChanged(qreal value);
+
+protected:
+    qreal _parentScaleValue;
+    qreal _parentRotateValue;
+    qreal _parentTranslateValue;
+    EllipseHookItem *_parentItem;
+
+private slots:
+    void parentScaleChanged(qreal newValue);
+    void parentRotationChanged(qreal newValue);
+    void parentTranslateChanged(qreal newValue);
 
 };
 

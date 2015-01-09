@@ -9,6 +9,7 @@ class PillarItem : public AbstractItem
 public:
     explicit PillarItem(QSvgRenderer *renderer, QGraphicsItem *parent = 0);
     virtual void setCountSteps(int count);
+    virtual void resetCurrentState();
 
     virtual qreal min() const;
     virtual qreal max() const;
@@ -21,14 +22,19 @@ public:
         setMaxAngle(v);
     }
 
+
+signals:
+    void scaledChanged(qreal newScale);
+
 public slots:
     virtual void increment(); //поворот стойки по часовой стрелке на 1 шаг
     virtual void decrement(); //поворот стойки против часовой стрелке на 1 шаг
+    virtual void increment(int value);//поворот стойки по часовой стрелке на value шагов
+    virtual void decrement(int value);//поворот стойки против часовой стрелке на value шагов
 
-//    virtual void increment(int value); //поворот стойки по часовой стрелке на value шагов
-//    virtual void decrement(int value); //поворот стойки по часовой стрелке на value шагов
+protected:
 
-
+    void compareAndSetState(qreal newState);
 };
 
 #endif // PILLARITEM_H

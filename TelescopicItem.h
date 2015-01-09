@@ -2,6 +2,7 @@
 #define TELESCOPICITEM_H
 
 #include "AbstractItem.h"
+#include "OutriggerItem.h"
 
 class TelescopicItem : public AbstractItem
 {
@@ -14,29 +15,33 @@ public:
 
     virtual qreal min() const;
     virtual qreal max() const;
-    virtual void setMin(qreal v)
-    {
-        setMinX(v);
-    }
-    virtual void setMax(qreal v)
-    {
-        setMaxX(v);
-    }
+    virtual void setMin(qreal v);
+    virtual void setMax(qreal v);
 
-protected:
-    virtual QVariant itemChange(GraphicsItemChange change, const QVariant & value);
+    virtual void setParentItemMy(AbstractItem *item);
+
+signals:
+    void scaledChanged(qreal newScale);
+    void rotationChanged(qreal newScale);
+    void translateChanged(qreal newValue);
 
 public slots:
     virtual void increment();
     virtual void decrement();
-    virtual void increment(int value)
-    {
-        AbstractItem::increment(value);
-    }
-    virtual void decrement(int value)
-    {
-        AbstractItem::decrement(value);
-    }
+    virtual void increment(int value);
+    virtual void decrement(int value);
+
+protected:
+    //    virtual QVariant itemChange(GraphicsItemChange change, const QVariant & value);
+    OutriggerItem *_parentItem;
+    qreal _parentScaleValue;
+    qreal _parentRotateValue;
+
+    virtual void compareAndSetState(qreal newState);
+
+private slots:
+    void parentScaleChanged(qreal newValue);
+    void parentRotationChanged(qreal newValue);
 
 };
 

@@ -4,6 +4,7 @@
 #include <QGraphicsSvgItem>
 #include <QSvgRenderer>
 #include <QDebug>
+#include <math.h>
 
 static const int DefaultCountSteps = 10;
 static const qreal DefaultMinAngle = 0;
@@ -30,7 +31,8 @@ enum TypeItem
 enum Action
 {
     Increment = 1,
-    Decrement
+    Decrement,
+    Reset
 };
 }
 
@@ -54,8 +56,10 @@ public:
     int countSteps() const;
     qreal currentStep() const;
     virtual void setCountSteps(int count)=0;
+//    virtual void addChild(AbstractItem *);
 
-//    QPointF basicPos();
+    QPointF basicPos();
+    void setBasicPos(QPointF p);
 
 public slots:
     //служит для обработки изменения состояния у объектов-предков
@@ -72,22 +76,23 @@ signals:
     void signalItemChanged(GraphicsItemChange change);
     void itemIsChanged(int itemType, Action action, qreal value);
 
+    void needDrawPoint(QPointF p);
+
 protected:
     QSvgRenderer *_renderer;
     int _type;
     qreal _minAngle;
     qreal _maxAngle;
-//    qreal _currentAngle;
+    QPointF _basicPos;
 
     QPointF _pointMin;
     QPointF _pointMax;
-//    QPointF _currentPoint;
 
     int _countSteps;
     qreal _currentStep;
-    int _currentState; //угол отклонения, абсцисса/ордината точки выдвижения, и пр.
+    qreal _currentState; //угол отклонения, абсцисса/ордината точки выдвижения, и пр.
 
-
+//    virtual void compareAndSetState(qreal newState);
 
     //для деталей которые можно повернуть(наклонить) вверх/вниз
     qreal minAngle() const;

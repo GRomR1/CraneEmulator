@@ -25,6 +25,16 @@ Widget::Widget(QWidget *parent) :
     ui->_verticalSliderRightCrutch->setSingleStep(1);
 
     _pillar = new PillarItem(renderer);
+    _pillar->setMax(50);
+    _pillar->setMin(-50);
+    _pillar->setCountSteps(10);
+    ui->_verticalSliderPillar->setMaximum(5);
+    ui->_verticalSliderPillar->setMinimum(-5);
+    ui->_verticalSliderPillar->setSingleStep(1);
+    ui->_verticalSliderPillar->setValue(0);
+
+    _ellipseDerrick = new OtherItem(AbstractItems::EllipseDerick, renderer);
+    _ellipseDerrick->setId("ellipse_derrick");
 
     _derrick = new DerrickItem(renderer);
     _derrick->setFlags(QGraphicsItem::ItemStacksBehindParent /*|
@@ -32,50 +42,56 @@ Widget::Widget(QWidget *parent) :
     _derrick->setMax(30);
     _derrick->setMin(0);
     _derrick->setCountSteps(15);
+    _derrick->setParentItemMy(_pillar);
     ui->_verticalSliderDerrick->setMaximum(15);
     ui->_verticalSliderDerrick->setSingleStep(1);
 
-    _ellipseDerrick = new OtherItem(AbstractItems::EllipseDerick, renderer);
-    _ellipseDerrick->setId("ellipse_derrick");
-
-    _ellipseOutrigger = new OtherItem(AbstractItems::EllipseOutrigger, renderer);
-    _ellipseOutrigger->setId("ellipse_outrigger");
-    _ellipseOutrigger->setPos(_ellipseOutrigger->mapToItem(_derrick, QPointF(0,0)));
-    _ellipseOutrigger->setParentItem(_derrick);
+    _ellipseOutrigger = new EllipseOutriggerItem(renderer);
+//    _ellipseOutrigger->setPos(_ellipseOutrigger->mapToItem(_derrick, QPointF(0,0)));
+//    _ellipseOutrigger->setBasicPos(_ellipseOutrigger->pos());
+    _ellipseOutrigger->setParentItemMy(_derrick);
+    _scene->addItem(_ellipseOutrigger);
 
     _outrigger = new OutriggerItem(renderer);
-    _outrigger->setPos(_outrigger->mapToItem(_derrick, QPointF(0,0)));
     _outrigger->setFlags(QGraphicsItem::ItemStacksBehindParent);
-    _outrigger->setParentItem(_derrick);
+//    _outrigger->setPos(_outrigger->mapToItem(_derrick, QPointF(0,0)));
+//    _outrigger->setParentItem(_derrick);
+//    _derrick->addChild(_outrigger);
+//    _derrick->setChildBasicPos(AbstractItems::Outrigger, _outrigger->mapToItem(_derrick, QPointF(0,0)));
     _outrigger->setMax(0);
     _outrigger->setMin(-30);
     _outrigger->setCountSteps(15);
     ui->_verticalSliderOutrigger->setMaximum(15);
     ui->_verticalSliderOutrigger->setValue(15);
     ui->_verticalSliderOutrigger->setSingleStep(1);
+    _outrigger->setParentItemMy(_ellipseOutrigger);
 
     _telescopic = new TelescopicItem(renderer);
-    _telescopic->setPos(_telescopic->mapToItem(_outrigger, QPointF(0,0)));
     _telescopic->setFlags(QGraphicsItem::ItemStacksBehindParent);
-    _telescopic->setParentItem(_outrigger);
+//    _telescopic->setPos(_telescopic->mapToItem(_outrigger, QPointF(0,0)));
+//    _telescopic->setParentItem(_outrigger);
     _telescopic->setMax(20);
     _telescopic->setMin(0);
     _telescopic->setCountSteps(10);
     ui->_verticalSliderTelescopic->setMaximum(10);
     ui->_verticalSliderTelescopic->setValue(0);
     ui->_verticalSliderTelescopic->setSingleStep(1);
+    _telescopic->setParentItemMy(_outrigger);
 
-    _ellipseHook = new OtherItem(AbstractItems::EllipseHook, renderer);
-    _ellipseHook->setId("ellipse_hook");
-    _ellipseHook->setPos(_ellipseHook->mapToItem(_telescopic, QPointF(0,0)));
-    _ellipseHook->setParentItem(_telescopic);
+    _ellipseHook = new EllipseHookItem(renderer);
+//    _telescopic->setFlags(QGraphicsItem::ItemStacksBehindParent);
+//    _ellipseHook->setPos(_ellipseHook->mapToItem(_telescopic, QPointF(0,0)));
+    //    _ellipseHook->setParentItem(_telescopic);
+    _ellipseHook->setParentItemMy(_telescopic);
+//    connect(_ellipseHook, SIGNAL(needDrawPoint(QPointF)),
+//            this, SLOT(drawPoint(QPointF)));
 
     _ropeHook = new RopeHookItem(renderer);
-    _ropeHook->setId("rope_hook");
-    _ropeHook->setPos(_ropeHook->mapToItem(_telescopic, QPointF(0,0)));
-    _ropeHook->setFlags(QGraphicsItem::ItemStacksBehindParent |
-                        QGraphicsItem::ItemSendsGeometryChanges);
-    _ropeHook->setParentItem(_telescopic);
+//    _ropeHook->setPos(_ropeHook->mapToItem(_telescopic, QPointF(0,0)));
+//    _ropeHook->setFlags(QGraphicsItem::ItemStacksBehindParent |
+//                        QGraphicsItem::ItemSendsGeometryChanges);
+//    _ropeHook->setParentItem(_telescopic);
+    _ropeHook->setParentItemMy(_ellipseHook);
 
     _hook = new HookItem(renderer);
     _hook->setId("hook");
@@ -91,13 +107,17 @@ Widget::Widget(QWidget *parent) :
     _scene->addItem(_ground);
     _scene->addItem(_leftCrutch);
     _scene->addItem(_rightCrutch);
-//    _scene->addItem(_ropeHook);
+    _scene->addItem(_ropeHook);
 //    _scene->addItem(_hook);
-//    _scene->addItem(_telescopic);
-//    _scene->addItem(_outrigger);
+    _scene->addItem(_telescopic);
+    _scene->addItem(_ellipseHook);
     _scene->addItem(_derrick);
+    _scene->addItem(_outrigger);
     _scene->addItem(_pillar);
     _scene->addItem(_ellipseDerrick);
+
+//    connect(_pillar, SIGNAL(itemIsChanged(int,Action,qreal)),
+//            _derrick, SLOT(actionAfterPillarRotate(int,Action,qreal)));
 
 //    _scene->addItem(_ellipseOutrigger);
 
@@ -120,12 +140,16 @@ Widget::Widget(QWidget *parent) :
 
 //    _scene->addLine(QLineF(0, 0, 300, 0), QPen(Qt::green, 0.5)); //horizontal (y1==y2)
 //    _scene->addLine(QLineF(0, 0, 0, 200), QPen(Qt::green, 0.5)); //vertical (x1==x2)
-    _itemEllipse = _scene->addEllipse(QRectF(0,0,1,1), QPen(Qt::NoPen), QBrush(Qt::red));
+
+    QPointF p(0,0);
+    p = _ellipseHook->pos();
+    _itemEllipse = _scene->addEllipse(QRectF(p.x(),p.y(),1,1), QPen(Qt::NoPen), QBrush(Qt::red));
     connect(_scene, SIGNAL(clicked(QPointF)),
             this, SLOT(sceneClicked(QPointF)));
 
 
-    ui->_view->scale(4,4);
+//    ui->_view->scale(4,4);
+    ui->_verticalSliderScale->setValue(30);
 }
 
 Widget::~Widget()
@@ -160,6 +184,10 @@ void Widget::sceneClicked(QPointF point)
     addText(str);
 }
 
+void Widget::drawPoint(QPointF p)
+{
+    _scene->addEllipse(QRectF(p.x(),p.y(),1,1), QPen(Qt::NoPen), QBrush(Qt::green));
+}
 
 void Widget::on__pushButtonDerrickRotatePlus_clicked()
 {
@@ -315,7 +343,10 @@ void Widget::on__verticalSliderDerrick_sliderReleased()
     _derrick->resetCurrentState();
     int v = ui->_verticalSliderDerrick->value();
     mes+=QString::number(v);
-    _derrick->increment(v);
+    if(v==0)
+        _derrick->resetCurrentState();
+    else
+        _derrick->increment(v);
     addText(mes);
 }
 
@@ -336,5 +367,42 @@ void Widget::on__verticalSliderTelescopic_sliderReleased()
     int v = ui->_verticalSliderTelescopic->value();
     mes+=QString::number(v);
     _telescopic->increment(v);
+    addText(mes);
+}
+
+void Widget::on__pushButtonPillarPlus_clicked()
+{
+    QString mes("pillar +");
+    ui->_verticalSliderPillar->setValue(
+                ui->_verticalSliderPillar->value() +
+                ui->_verticalSliderPillar->singleStep());
+    _pillar->increment();
+    addText(mes);
+}
+
+void Widget::on__pushButtonPillarMinus_clicked()
+{
+    QString mes("pillar -");
+    ui->_verticalSliderPillar->setValue(
+                ui->_verticalSliderPillar->value() -
+                ui->_verticalSliderPillar->singleStep());
+    _pillar->decrement();
+    addText(mes);
+}
+
+void Widget::on__verticalSliderPillar_sliderReleased()
+{
+    QString mes("pillar set ");
+    _pillar->resetCurrentState();
+    int v = ui->_verticalSliderPillar->value();
+    mes+=QString::number(v);
+    if(v>=0)
+    {
+        _pillar->increment(v);
+    }
+    else
+    {
+        _pillar->decrement(qAbs(v));
+    }
     addText(mes);
 }

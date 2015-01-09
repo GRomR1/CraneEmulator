@@ -32,11 +32,16 @@ void AbstractItem::resetCurrentState()
     _currentState=0;
 }
 
-//QPointF AbstractItem::basicPos()
-//{
-//    return _basicPos;
-//}
+QPointF AbstractItem::basicPos()
+{
+    return _basicPos;
+}
 
+void AbstractItem::setBasicPos(QPointF p)
+{
+//    qDebug()<<pos() << p;
+    _basicPos=p;
+}
 
 void AbstractItem::slotItemChanged(GraphicsItemChange change)
 {

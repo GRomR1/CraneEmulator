@@ -2,6 +2,8 @@
 #define DERRICKITEM_H
 
 #include "AbstractItem.h"
+//#include "OutriggerItem.h"
+#include "PillarItem.h"
 
 class DerrickItem : public AbstractItem
 {
@@ -22,21 +24,26 @@ public:
         setMaxAngle(v);
     }
 
-protected:
-    virtual QVariant itemChange(GraphicsItemChange change, const QVariant & value);
+    virtual void setParentItemMy(AbstractItem *item);
+
+signals:
+    void scaledChanged(qreal newScale);
+    void rotationChanged(qreal newScale);
 
 public slots:
     virtual void increment();
     virtual void decrement();
+    virtual void increment(int value);
+    virtual void decrement(int value);
 
-    virtual void increment(int value)
-    {
-        AbstractItem::increment(value);
-    }
-    virtual void decrement(int value)
-    {
-        AbstractItem::decrement(value);
-    }
+private slots:
+    void parentScaleChanged(qreal newValue);
+
+protected:
+    qreal _lastScaleValue;
+    PillarItem *_parentItem;
+
+    virtual void compareAndSetState(qreal newState);
 
 };
 

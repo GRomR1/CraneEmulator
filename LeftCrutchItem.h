@@ -10,6 +10,7 @@ public:
     explicit LeftCrutchItem(QSvgRenderer *renderer, QGraphicsItem *parent = 0);
     virtual void setCountSteps(int count);
     virtual void resetCurrentState();
+
     virtual qreal min() const;
     virtual qreal max() const;
     virtual void setMin(qreal v)
