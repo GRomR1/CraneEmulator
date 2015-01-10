@@ -10,19 +10,12 @@ class DerrickItem : public AbstractItem
     Q_OBJECT
 public:
     explicit DerrickItem(QSvgRenderer *renderer, QGraphicsItem *parent = 0);
-    virtual void setCountSteps(int count);
     virtual void resetCurrentState();
 
     virtual qreal min() const;
     virtual qreal max() const;
-    virtual void setMin(qreal v)
-    {
-        setMinAngle(v);
-    }
-    virtual void setMax(qreal v)
-    {
-        setMaxAngle(v);
-    }
+    virtual void setMin(qreal v);
+    virtual void setMax(qreal v);
 
     virtual void setParentItemMy(AbstractItem *item);
 

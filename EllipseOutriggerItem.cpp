@@ -64,10 +64,10 @@ void EllipseOutriggerItem::parentRotationChanged(qreal newValue)
     setPos(_parentItem->mapToScene(basicPos()));
     _lastRotateValue=newValue;
 
-//    QTransform trans;
-//    trans.rotate(_lastRotateValue);
+    QTransform trans;
+    trans.rotate(_lastRotateValue);
 //    trans.scale(_lastScaleValue,1);
-//    setTransform(trans);
+    setTransform(trans);
 
     emit rotationChanged(_lastRotateValue);
 }

@@ -7,78 +7,86 @@ RopeHookItem::RopeHookItem(QSvgRenderer *renderer, QGraphicsItem *parent) :
     _parentRotateValue=0;
     _parentScaleValue=1;
     _parentTranslateValue=0;
+    _minIsReached=false;
 
     setId("rope_hook");
 }
 
-//QVariant RopeHookItem::itemChange(GraphicsItemChange change, const QVariant & value)
-//{
-//    emit signalItemChanged(change);
-////    qDebug() << "rope was changed" << change;
-//    if(change == QGraphicsItem::ItemRotationChange && scene())
-//    {
-//        qDebug() << "rope was rotated";
-//        return QVariant();
-//    }
-//    return AbstractItem::itemChange(change, value);
-//}
-
-
-//void RopeHookItem::slotItemChanged(GraphicsItemChange change)
-//{
-//    if(change == QGraphicsItem::ItemRotationChange && scene())
-//    {
-//        qDebug() << "rope was rotated";
-//        qDebug() << rotation();
-//    }
-//}
-
-
-//void RopeHookItem::slotRotationChanged()
-//{
-//    AbstractItem *item = dynamic_cast<AbstractItem *>(sender());
-//    qDebug() << item->rotation();
-//}
-
 void RopeHookItem::increment()
 {
-    //TODO продумать увеличение троса
-//    qreal newState = _currentState + _currentStep;
-//    if(newState > maxAngle())
-//        newState = maxAngle();
-//    _currentState = newState;
-    emit itemIsChanged(_type, Increment, _currentState);
+    qreal newState = _currentState + _currentStep;
+    if(newState > max())
+        newState = max();
+
+    compareAndSetState(newState);
 }
 
 void RopeHookItem::decrement()
 {
-    //TODO продумать уменьшение троса
-//    qreal newState = _currentState - _currentStep;
-//    if(newState > minAngle())
-//        newState = maxAngle();
-//    _currentState = newState;
-    emit itemIsChanged(_type, Decrement, _currentState);
+    qreal newState = _currentState - _currentStep;
+    if(newState < min())
+        newState = min();
+
+    compareAndSetState(newState);
+}
+void RopeHookItem::increment(int value)
+{
+    if(value < 0)
+    {
+        decrement(qAbs(value));
+        return;
+    }
+    if(!value)
+        return;
+    qreal newState = _currentState;
+    for(int i=0; i<value; i++)
+    {
+        newState += _currentStep;
+        if(newState > max())
+            newState = max();
+    }
+    compareAndSetState(newState);
 }
 
-void RopeHookItem::setCountSteps(int count)
+void RopeHookItem::decrement(int value)
 {
-    //TODO продумать просчет количесвта шагов троса
-//    if(count <= 0)
-//        return;
-    _countSteps = count;
-//    _currentStep=( qAbs(minAngle()) + qAbs(maxAngle()) ) / _countSteps;
+    if(value < 0)
+    {
+        increment(qAbs(value));
+        return;
+    }
+    if(!value)
+        return;
+    qreal newState = _currentState;
+    for(int i=0; i<value; i++)
+    {
+        newState -= _currentStep;
+        if(newState < min())
+            newState = min();
+    }
+    compareAndSetState(newState);
+}
+
+void RopeHookItem::resetCurrentState()
+{
+    compareAndSetState(1);
 }
 
 qreal RopeHookItem::min() const
 {
-    //TODO продумать минимальное состояние троса
-    return 0;
+    return minScale();
 }
-
 qreal RopeHookItem::max() const
 {
-    //TODO продумать максимальное состояние троса
-    return 0;
+    return maxScale();
+}
+void RopeHookItem::setMin(qreal v)
+{
+    setMinScale(v);
+}
+void RopeHookItem::setMax(qreal v)
+{
+    setMaxScale(v);
 }
 
 void RopeHookItem::setParentItemMy(AbstractItem *item)
@@ -135,4 +143,34 @@ void RopeHookItem::parentTranslateChanged(qreal newValue)
 //    setTransform(trans);
 
     emit translateChanged(_parentTranslateValue);
+}
+
+
+void RopeHookItem::compareAndSetState(qreal newState)
+{
+    if(!qFuzzyCompare(100 + _currentState, 100 + newState))
+    {
+        _currentState = newState;
+        if(qFuzzyCompare(100 + _currentState, 100 + min()))
+        {
+            if(!_minIsReached)
+            {
+                emit minIsReached();
+                _minIsReached = true;
+            }
+        }
+        else
+        {
+            if(_minIsReached)
+            {
+                emit stopMinIsReached();
+                _minIsReached=false;
+            }
+        }
+        QTransform trans;
+        trans.scale(1,_currentState);
+        setTransform(trans);
+//        emit itemIsChanged(_type, Increment, _currentState);
+        emit scaledYChanged(_currentState);
+    }
 }

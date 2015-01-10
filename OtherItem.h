@@ -8,12 +8,6 @@ class OtherItem : public AbstractItem
     Q_OBJECT
 public:
     explicit OtherItem(TypeItem typeItem, QSvgRenderer *renderer, QGraphicsItem *parent = 0);
-    virtual void setCountSteps(int count)
-    {
-        Q_UNUSED(count);
-        _countSteps=0;
-    }
-
     virtual qreal min() const
     {
         return 0;

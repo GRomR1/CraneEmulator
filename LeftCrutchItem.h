@@ -8,7 +8,6 @@ class LeftCrutchItem : public AbstractItem
     Q_OBJECT
 public:
     explicit LeftCrutchItem(QSvgRenderer *renderer, QGraphicsItem *parent = 0);
-    virtual void setCountSteps(int count);
     virtual void resetCurrentState();
 
     virtual qreal min() const;

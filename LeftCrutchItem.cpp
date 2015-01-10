@@ -37,14 +37,6 @@ void LeftCrutchItem::decrement()
     emit itemIsChanged(_type, Decrement, _currentState);
 }
 
-void LeftCrutchItem::setCountSteps(int count)
-{
-    if(count <= 0)
-        return;
-    _countSteps = count;
-    _currentStep=( qAbs(min()) + qAbs(max()) ) / _countSteps;
-}
-
 void LeftCrutchItem::resetCurrentState()
 {
     AbstractItem::resetCurrentState();

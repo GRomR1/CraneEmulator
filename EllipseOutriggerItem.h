@@ -9,10 +9,6 @@ class EllipseOutriggerItem : public AbstractItem
     Q_OBJECT
 public:
     explicit EllipseOutriggerItem(QSvgRenderer *renderer, QGraphicsItem *parent = 0);
-    virtual void setCountSteps(int count)
-    {
-        Q_UNUSED(count);
-    }
     virtual qreal min() const;
     virtual qreal max() const;
     virtual void setMin(qreal v)

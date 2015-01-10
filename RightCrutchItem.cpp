@@ -43,14 +43,6 @@ void RightCrutchItem::resetCurrentState()
     resetTransform();
 }
 
-void RightCrutchItem::setCountSteps(int count)
-{
-    if(count <= 0)
-        return;
-    _countSteps = count;
-    _currentStep=( qAbs(min()) + qAbs(max()) ) / _countSteps;
-}
-
 qreal RightCrutchItem::min() const
 {
     return minY();

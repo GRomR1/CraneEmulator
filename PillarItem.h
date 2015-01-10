@@ -8,7 +8,6 @@ class PillarItem : public AbstractItem
     Q_OBJECT
 public:
     explicit PillarItem(QSvgRenderer *renderer, QGraphicsItem *parent = 0);
-    virtual void setCountSteps(int count);
     virtual void resetCurrentState();
 
     virtual qreal min() const;
@@ -33,8 +32,7 @@ public slots:
     virtual void decrement(int value);//поворот стойки против часовой стрелке на value шагов
 
 protected:
-
-    void compareAndSetState(qreal newState);
+    virtual void compareAndSetState(qreal newState);
 };
 
 #endif // PILLARITEM_H

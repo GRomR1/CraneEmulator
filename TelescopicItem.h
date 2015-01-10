@@ -10,7 +10,6 @@ class TelescopicItem : public AbstractItem
 
 public:
     explicit TelescopicItem(QSvgRenderer *renderer, QGraphicsItem *parent = 0);
-    virtual void setCountSteps(int count);    
     virtual void resetCurrentState();
 
     virtual qreal min() const;
@@ -32,7 +31,6 @@ public slots:
     virtual void decrement(int value);
 
 protected:
-    //    virtual QVariant itemChange(GraphicsItemChange change, const QVariant & value);
     OutriggerItem *_parentItem;
     qreal _parentScaleValue;
     qreal _parentRotateValue;

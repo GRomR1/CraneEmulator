@@ -6,12 +6,15 @@ AbstractItem::AbstractItem(QSvgRenderer *renderer, QGraphicsItem *parent) :
     _maxAngle(DefaultMaxAngle),
     _pointMin(QPointF(0,0)),
     _pointMax(QPointF(0,0)),
+    _minScale(1),
+    _maxScale(1),
     _countSteps(DefaultCountSteps),
     _currentState(0)
 {
     _renderer = renderer;
     setSharedRenderer(_renderer);
     _type = Abstract;
+    setCacheMode(QGraphicsItem::NoCache);
 }
 
 
@@ -19,7 +22,6 @@ void AbstractItem::setId(QString id)
 {
     setElementId(id);
     setPos(_renderer->boundsOnElement(id).topLeft());
-//    _basicPos = pos();
 }
 
 int AbstractItem::type() const
@@ -29,7 +31,6 @@ int AbstractItem::type() const
 
 void AbstractItem::resetCurrentState()
 {
-    _currentState=0;
 }
 
 QPointF AbstractItem::basicPos()
@@ -41,11 +42,6 @@ void AbstractItem::setBasicPos(QPointF p)
 {
 //    qDebug()<<pos() << p;
     _basicPos=p;
-}
-
-void AbstractItem::slotItemChanged(GraphicsItemChange change)
-{
-    emit signalItemChanged(change);
 }
 
 
@@ -69,6 +65,17 @@ void AbstractItem::decrement(int value)
     }
     for(int i=0; i<value; i++)
         decrement();
+}
+
+void AbstractItem::setValue(qreal v)
+{
+    if(v > min() && v < max())
+        _currentState = v;
+}
+
+qreal AbstractItem::value() const
+{
+    return _currentState;
 }
 
 int AbstractItem::countSteps() const
@@ -145,4 +152,24 @@ void AbstractItem::setMinX(qreal v)
 void AbstractItem::setMinY(qreal v)
 {
     _pointMin.setY(v);
+}
+
+qreal AbstractItem::minScale() const
+{
+    return _minScale;
+}
+
+qreal AbstractItem::maxScale() const
+{
+    return _maxScale;
+}
+
+void AbstractItem::setMinScale(qreal v)
+{
+    _minScale=v;
+}
+
+void AbstractItem::setMaxScale(qreal v)
+{
+    _maxScale=v;
 }

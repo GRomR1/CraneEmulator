@@ -53,18 +53,22 @@ public:
     virtual void setMin(qreal v) = 0;
     virtual void setMax(qreal v) = 0;
 
+    void setValue(qreal v);
+    qreal value() const;
     int countSteps() const;
     qreal currentStep() const;
-    virtual void setCountSteps(int count)=0;
-//    virtual void addChild(AbstractItem *);
+    virtual void setCountSteps(int count)
+    {
+        if(count <= 0)
+            return;
+        _countSteps = count;
+        _currentStep=( qAbs(min()) + qAbs(max()) ) / _countSteps;
+    }
 
     QPointF basicPos();
     void setBasicPos(QPointF p);
 
 public slots:
-    //служит для обработки изменения состояния у объектов-предков
-    //отправляет сигнал signalItemChanged
-    virtual void slotItemChanged(GraphicsItemChange change);
 
     virtual void increment()=0;
     virtual void decrement()=0;
@@ -73,10 +77,9 @@ public slots:
     virtual void decrement(int value);
 
 signals:
-    void signalItemChanged(GraphicsItemChange change);
     void itemIsChanged(int itemType, Action action, qreal value);
 
-    void needDrawPoint(QPointF p);
+    void needDrawPoint(QPointF p); //для отладки - соединить со слотом отрисовки точки
 
 protected:
     QSvgRenderer *_renderer;
@@ -88,19 +91,20 @@ protected:
     QPointF _pointMin;
     QPointF _pointMax;
 
+    qreal _minScale;
+    qreal _maxScale;
+
     int _countSteps;
     qreal _currentStep;
     qreal _currentState; //угол отклонения, абсцисса/ордината точки выдвижения, и пр.
 
-//    virtual void compareAndSetState(qreal newState);
-
-    //для деталей которые можно повернуть(наклонить) вверх/вниз
+    //для деталей(derrick, outrigger) которые можно повернуть(наклонить) вверх/вниз
     qreal minAngle() const;
     qreal maxAngle() const;
     void setMinAngle(qreal angle);
     void setMaxAngle(qreal angle);
 
-    //для деталей которые перемещаются вдоль одной из осей
+    //для деталей(telesopic, crutches) которые перемещаются вдоль одной из осей
     qreal minX() const;
     qreal minY() const;
     qreal maxX() const;
@@ -109,6 +113,12 @@ protected:
     void setMaxY(qreal v);
     void setMinX(qreal v);
     void setMinY(qreal v);
+
+    //для деталей(rope hook), которые изменают свой масштаб/длину
+    qreal minScale() const;
+    qreal maxScale() const;
+    void setMinScale(qreal v);
+    void setMaxScale(qreal v);
 };
 
 #endif // ABSTRACTITEM_H
