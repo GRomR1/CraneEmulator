@@ -8,7 +8,6 @@ Widget::Widget(QWidget *parent) :
 {
     ui->setupUi(this);
     _scene = new GraphicsScene(QRectF(0, 30, 220, 150));
-    ui->_view->setScene(_scene);
     QSvgRenderer *renderer = new QSvgRenderer(QString(":/Кран_ВидCбоку.svg"));
 //    qDebug() << renderer->elementExists("pillar") << renderer->elementExists("hook") << "";
 //    qDebug() << renderer->boundsOnElement("pillar").topLeft() << renderer->boundsOnElement("hook").topLeft();
@@ -97,7 +96,6 @@ Widget::Widget(QWidget *parent) :
     _ground = new OtherItem(AbstractItems::Ground, renderer);
     _ground->setId("ground");
 
-    _scene->addItem(_ground);
     _scene->addItem(_leftCrutch);
     _scene->addItem(_rightCrutch);
     _scene->addItem(_ropeHook);
@@ -108,6 +106,17 @@ Widget::Widget(QWidget *parent) :
     _scene->addItem(_outrigger);
     _scene->addItem(_pillar);
     _scene->addItem(_ellipseDerrick);
+    _scene->addItem(_ground);
+
+    qreal x=_ground->mapToScene(QPointF(0,0)).x();
+    qreal y=_ground->mapToScene(QPointF(0,0)).y() + _ground->boundingRect().height();
+    QRectF rect(x, 30, _ground->boundingRect().width(), y-30);
+    _scene->setSceneRect(rect);
+    _scene->addRect(rect, QPen(Qt::green));
+    QRectF rectWhite(x,rect.y()+rect.height(), rect.width(),100);
+    _scene->addRect(rectWhite, QPen(Qt::NoPen), QBrush(Qt::white));
+    ui->_view->setSceneRect(rect);
+    ui->_view->setScene(_scene);
 
 //    _scene->addLine(QLineF(0, 0, 300, 0), QPen(Qt::green, 0.5)); //horizontal (y1==y2)
 //    _scene->addLine(QLineF(0, 0, 0, 200), QPen(Qt::green, 0.5)); //vertical (x1==x2)
