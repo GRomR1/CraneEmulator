@@ -1,13 +1,14 @@
-#ifndef CRUTCHITEM_H
-#define CRUTCHITEM_H
+#ifndef DERRICKITEM_H
+#define DERRICKITEM_H
 
-#include "AbstractItem.h"
+#include "../AbstractItem.h"
+namespace Side {
 
-class CrutchItem : public AbstractItem
+class DerrickItem : public AbstractItem
 {
     Q_OBJECT
 public:
-    explicit CrutchItem(int type, QSvgRenderer *renderer, QGraphicsItem *parent = 0);
+    explicit DerrickItem(QSvgRenderer *renderer, QGraphicsItem *parent = 0);
     virtual void resetCurrentState();
 
     virtual qreal min() const;
@@ -15,18 +16,20 @@ public:
     virtual void setMin(qreal v);
     virtual void setMax(qreal v);
 
-signals:
-    void translateYChanged(qreal value);
-
 public slots:
     virtual void increment();
     virtual void decrement();
     virtual void increment(int value);
     virtual void decrement(int value);
 
+protected slots:
+    virtual void parentScaleXChanged(qreal newValue);
+
 protected:
     virtual void compareAndSetState(qreal newState);
 
 };
 
-#endif // CRUTCHITEM_H
+}
+
+#endif // DERRICKITEM_H

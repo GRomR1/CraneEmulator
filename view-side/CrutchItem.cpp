@@ -1,5 +1,7 @@
 #include "CrutchItem.h"
 
+using namespace Side;
+
 CrutchItem::CrutchItem(int type, QSvgRenderer *renderer, QGraphicsItem *parent) :
     AbstractItem(renderer, parent)
 {

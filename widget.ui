@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Widget</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout">
+  <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1">
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
@@ -500,7 +500,22 @@
     </layout>
    </item>
    <item>
-    <widget class="QGraphicsView" name="_view"/>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Crane</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <widget class="QSplitter" name="splitter">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <widget class="QGraphicsView" name="_view"/>
+        <widget class="QGraphicsView" name="_viewTop"/>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </item>
   </layout>
  </widget>

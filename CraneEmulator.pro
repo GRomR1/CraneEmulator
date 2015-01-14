@@ -4,42 +4,29 @@
 #
 #-------------------------------------------------
 
-QT       += core gui svg xml
+QT       += core gui svg
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = CraneEmulator
 TEMPLATE = app
 
+INCLUDEPATH += view-top \
+               view-side
 
-SOURCES += main.cpp\
+include(view-top/Top.pri)
+include(view-side/Side.pri)
+
+SOURCES += main.cpp \
         widget.cpp \
-    AbstractItem.cpp \
-    RopeHookItem.cpp \
-    TelescopicItem.cpp \
-    DerrickItem.cpp \
-    OutriggerItem.cpp \
-    HookItem.cpp \
-    PillarItem.cpp \
-    OtherItem.cpp \
-    EllipseOutriggerItem.cpp \
-    EllipseHookItem.cpp \
-    CrutchItem.cpp
+        AbstractItem.cpp
 
 HEADERS  += widget.h \
-    AbstractItem.h \
-    RopeHookItem.h \
-    TelescopicItem.h \
-    DerrickItem.h \
-    OutriggerItem.h \
-    HookItem.h \
-    PillarItem.h \
-    OtherItem.h \
-    EllipseOutriggerItem.h \
-    EllipseHookItem.h \
-    CrutchItem.h
+        AbstractItem.h
 
 FORMS    += widget.ui
 
 RESOURCES += \
     resources.qrc
+
+OTHER_FILES +=

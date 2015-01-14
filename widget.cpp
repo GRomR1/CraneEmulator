@@ -8,23 +8,27 @@ Widget::Widget(QWidget *parent) :
 {
     ui->setupUi(this);
     _scene = new GraphicsScene(QRectF(0, 30, 220, 150));
+    _sceneTop = new GraphicsScene(QRectF(0, 0, 220, 120));
     QSvgRenderer *renderer = new QSvgRenderer(QString(":/Кран_ВидCбоку.svg"));
+//    QSvgRenderer *rendererTop = new QSvgRenderer(QString(":/Кран_ВидСверху.svg"));
+    QGraphicsSvgItem *item1Top = new QGraphicsSvgItem(QString(":/Кран_ВидСверху.svg"));
+    _sceneTop->addItem(item1Top);
 //    qDebug() << renderer->elementExists("pillar") << renderer->elementExists("hook") << "";
 //    qDebug() << renderer->boundsOnElement("pillar").topLeft() << renderer->boundsOnElement("hook").topLeft();
 
-    _leftCrutch = new CrutchItem(AbstractItems::LeftCrutch, renderer);
+    _leftCrutch = new Side::CrutchItem(AbstractItems::LeftCrutch, renderer);
     _leftCrutch->setMax(10);
     _leftCrutch->setCountSteps(5);
     ui->_verticalSliderLeftCrutch->setMaximum(5);
     ui->_verticalSliderLeftCrutch->setSingleStep(1);
 
-    _rightCrutch = new CrutchItem(AbstractItems::RightCrutch, renderer);
+    _rightCrutch = new Side::CrutchItem(AbstractItems::RightCrutch, renderer);
     _rightCrutch->setMax(10);
     _rightCrutch->setCountSteps(5);
     ui->_verticalSliderRightCrutch->setMaximum(5);
     ui->_verticalSliderRightCrutch->setSingleStep(1);
 
-    _pillar = new PillarItem(renderer);
+    _pillar = new Side::PillarItem(renderer);
     _pillar->setMax(50);
     _pillar->setMin(-50);
     _pillar->setCountSteps(10);
@@ -33,10 +37,10 @@ Widget::Widget(QWidget *parent) :
     ui->_verticalSliderPillar->setSingleStep(1);
     ui->_verticalSliderPillar->setValue(0);
 
-    _ellipseDerrick = new OtherItem(AbstractItems::EllipseDerick, renderer);
+    _ellipseDerrick = new Side::OtherItem(AbstractItems::EllipseDerick, renderer);
     _ellipseDerrick->setId("ellipse_derrick");
 
-    _derrick = new DerrickItem(renderer);
+    _derrick = new Side::DerrickItem(renderer);
     _derrick->setFlags(QGraphicsItem::ItemStacksBehindParent /*|
                         QGraphicsItem::ItemSendsGeometryChanges*/);
     _derrick->setMax(30);
@@ -46,11 +50,11 @@ Widget::Widget(QWidget *parent) :
     ui->_verticalSliderDerrick->setMaximum(15);
     ui->_verticalSliderDerrick->setSingleStep(1);
 
-    _ellipseOutrigger = new EllipseOutriggerItem(renderer);
+    _ellipseOutrigger = new Side::EllipseOutriggerItem(renderer);
     _ellipseOutrigger->setParentItemMy(_derrick);
     _scene->addItem(_ellipseOutrigger);
 
-    _outrigger = new OutriggerItem(renderer);
+    _outrigger = new Side::OutriggerItem(renderer);
     _outrigger->setFlags(QGraphicsItem::ItemStacksBehindParent);
     _outrigger->setMax(0);
     _outrigger->setMin(-30);
@@ -60,7 +64,7 @@ Widget::Widget(QWidget *parent) :
     ui->_verticalSliderOutrigger->setSingleStep(1);
     _outrigger->setParentItemMy(_ellipseOutrigger);
 
-    _telescopic = new TelescopicItem(renderer);
+    _telescopic = new Side::TelescopicItem(renderer);
     _telescopic->setFlags(QGraphicsItem::ItemStacksBehindParent);
     _telescopic->setMax(20);
     _telescopic->setMin(0);
@@ -70,12 +74,12 @@ Widget::Widget(QWidget *parent) :
     ui->_verticalSliderTelescopic->setSingleStep(1);
     _telescopic->setParentItemMy(_outrigger);
 
-    _ellipseHook = new EllipseHookItem(renderer);
+    _ellipseHook = new Side::EllipseHookItem(renderer);
     _ellipseHook->setParentItemMy(_telescopic);
 //    connect(_ellipseHook, SIGNAL(needDrawPoint(QPointF)),
 //            this, SLOT(drawPoint(QPointF)));
 
-    _ropeHook = new RopeHookItem(renderer);
+    _ropeHook = new Side::RopeHookItem(renderer);
 //    _ropeHook->setFlags(QGraphicsItem::ItemStacksBehindParent |
 //                        QGraphicsItem::ItemSendsGeometryChanges);
     _ropeHook->setParentItemMy(_ellipseHook);
@@ -90,10 +94,10 @@ Widget::Widget(QWidget *parent) :
     connect(_ropeHook, SIGNAL(stopMinIsReached()),
             this, SLOT(stopHookWarning()));
 
-    _hook = new HookItem(renderer);
+    _hook = new Side::HookItem(renderer);
     _hook->setParentItemMy(_ropeHook);
 
-    _ground = new OtherItem(AbstractItems::Ground, renderer);
+    _ground = new Side::OtherItem(AbstractItems::Ground, renderer);
     _ground->setId("ground");
 
     _scene->addItem(_leftCrutch);
@@ -118,6 +122,10 @@ Widget::Widget(QWidget *parent) :
     ui->_view->setSceneRect(rect);
     ui->_view->setScene(_scene);
 
+    _sceneTop->setSceneRect(item1Top->boundingRect());
+    _sceneTop->addRect(item1Top->boundingRect(), QPen(Qt::green));
+    ui->_viewTop->setScene(_sceneTop);
+
 //    _scene->addLine(QLineF(0, 0, 300, 0), QPen(Qt::green, 0.5)); //horizontal (y1==y2)
 //    _scene->addLine(QLineF(0, 0, 0, 200), QPen(Qt::green, 0.5)); //vertical (x1==x2)
 
@@ -126,7 +134,7 @@ Widget::Widget(QWidget *parent) :
     connect(_scene, SIGNAL(clicked(QPointF)),
             this, SLOT(sceneClicked(QPointF)));
 
-    ui->_verticalSliderScale->setValue(30);
+    ui->_verticalSliderScale->setValue(25);
 }
 
 Widget::~Widget()

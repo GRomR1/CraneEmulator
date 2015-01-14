@@ -110,23 +110,24 @@ private slots:
 
 private:
     Ui::Widget *ui;
-    CrutchItem *_leftCrutch;
-    CrutchItem *_rightCrutch;
-    PillarItem *_pillar;
-    DerrickItem *_derrick;
-    OutriggerItem *_outrigger;
-    TelescopicItem *_telescopic;
-    RopeHookItem *_ropeHook;
-    HookItem *_hook;
+    Side::CrutchItem *_leftCrutch;
+    Side::CrutchItem *_rightCrutch;
+    Side::PillarItem *_pillar;
+    Side::DerrickItem *_derrick;
+    Side::OutriggerItem *_outrigger;
+    Side::TelescopicItem *_telescopic;
+    Side::RopeHookItem *_ropeHook;
+    Side::HookItem *_hook;
 
-    OtherItem *_ellipseDerrick;
-    EllipseOutriggerItem *_ellipseOutrigger;
-    EllipseHookItem *_ellipseHook;
-    OtherItem *_ground;
+    Side::OtherItem *_ellipseDerrick;
+    Side::EllipseOutriggerItem *_ellipseOutrigger;
+    Side::EllipseHookItem *_ellipseHook;
+    Side::OtherItem *_ground;
 
-    GraphicsScene *_scene;
     QGraphicsEllipseItem *_itemEllipse;
     QGraphicsEllipseItem *_itemEllipseForDebug;
+    GraphicsScene *_scene;
+    GraphicsScene *_sceneTop;
 };
 
 #endif // WIDGET_H

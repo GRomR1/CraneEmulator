@@ -2,6 +2,11 @@
 
 AbstractItem::AbstractItem(QSvgRenderer *renderer, QGraphicsItem *parent) :
     QGraphicsSvgItem(parent),
+    _parentScaleXValue(1),
+    _parentScaleYValue(1),
+    _parentRotateValue(0),
+    _parentTranslateXValue(0),
+    _parentTranslateYValue(0),
     _minAngle(DefaultMinAngle),
     _maxAngle(DefaultMaxAngle),
     _pointMin(QPointF(0,0)),
@@ -44,28 +49,45 @@ void AbstractItem::setBasicPos(QPointF p)
     _basicPos=p;
 }
 
-
-void AbstractItem::increment(int value)
+void AbstractItem::setParentItemMy(AbstractItem *item)
 {
-    if(value < 0)
-    {
-        decrement(qAbs(value));
-        return;
-    }
-    for(int i=0; i<value; i++)
-        increment();
-}
+    _parentItem = item;
+    connect(_parentItem, SIGNAL(scaleXChanged(qreal)),
+            this, SLOT(parentScaleXChanged(qreal)));
+    connect(_parentItem, SIGNAL(scaleYChanged(qreal)),
+            this, SLOT(parentScaleYChanged(qreal)));
 
-void AbstractItem::decrement(int value)
-{
-    if(value < 0)
-    {
-        increment(qAbs(value));
-        return;
-    }
-    for(int i=0; i<value; i++)
-        decrement();
+    connect(_parentItem, SIGNAL(rotationChanged(qreal)),
+            this, SLOT(parentRotationChanged(qreal)));
+
+    connect(_parentItem, SIGNAL(translateXChanged(qreal)),
+            this, SLOT(parentTranslateXChanged(qreal)));
+    connect(_parentItem, SIGNAL(translateYChanged(qreal)),
+            this, SLOT(parentTranslateYChanged(qreal)));
+
+    setBasicPos(_parentItem->mapFromScene(pos()));
 }
+//void AbstractItem::increment(int value)
+//{
+//    if(value < 0)
+//    {
+//        decrement(qAbs(value));
+//        return;
+//    }
+//    for(int i=0; i<value; i++)
+//        increment();
+//}
+
+//void AbstractItem::decrement(int value)
+//{
+//    if(value < 0)
+//    {
+//        increment(qAbs(value));
+//        return;
+//    }
+//    for(int i=0; i<value; i++)
+//        decrement();
+//}
 
 void AbstractItem::setValue(qreal v)
 {
@@ -86,6 +108,13 @@ int AbstractItem::countSteps() const
 qreal AbstractItem::currentStep() const
 {
     return _currentStep;
+}
+void AbstractItem::setCountSteps(int count)
+{
+    if(count <= 0)
+        return;
+    _countSteps = count;
+    _currentStep=( qAbs(min()) + qAbs(max()) ) / _countSteps;
 }
 
 qreal AbstractItem::minAngle() const

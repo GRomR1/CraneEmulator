@@ -27,13 +27,6 @@ enum TypeItem
     Ground,
     Abstract
 };
-
-enum Action
-{
-    Increment = 1,
-    Decrement,
-    Reset
-};
 }
 
 using namespace AbstractItems;
@@ -41,47 +34,57 @@ using namespace AbstractItems;
 class AbstractItem : public QGraphicsSvgItem
 {
     Q_OBJECT
-
 public:
     explicit AbstractItem(QSvgRenderer *renderer, QGraphicsItem *parent = 0);
     void setId(QString id);
     virtual int type() const;
     virtual void resetCurrentState();
-
-    virtual qreal min() const = 0;
-    virtual qreal max() const = 0;
-    virtual void setMin(qreal v) = 0;
-    virtual void setMax(qreal v) = 0;
+    virtual qreal min() const {return qreal();}
+    virtual qreal max() const {return qreal();}
+    virtual void setMin(qreal v) {Q_UNUSED(v)}
+    virtual void setMax(qreal v) {Q_UNUSED(v)}
 
     void setValue(qreal v);
     qreal value() const;
     int countSteps() const;
     qreal currentStep() const;
-    virtual void setCountSteps(int count)
-    {
-        if(count <= 0)
-            return;
-        _countSteps = count;
-        _currentStep=( qAbs(min()) + qAbs(max()) ) / _countSteps;
-    }
+    virtual void setCountSteps(int count);
 
     QPointF basicPos();
     void setBasicPos(QPointF p);
 
-public slots:
-
-    virtual void increment()=0;
-    virtual void decrement()=0;
-
-    virtual void increment(int value);
-    virtual void decrement(int value);
+    virtual void setParentItemMy(AbstractItem *item);
 
 signals:
-    void itemIsChanged(int itemType, Action action, qreal value);
+    void scaleXChanged(qreal value);
+    void scaleYChanged(qreal value);
+    void rotationChanged(qreal value);
+    void translateXChanged(qreal value);
+    void translateYChanged(qreal value);
 
     void needDrawPoint(QPointF p); //для отладки - соединить со слотом отрисовки точки
 
+public slots:
+    virtual void increment(){}
+    virtual void decrement(){}
+    virtual void increment(int value){Q_UNUSED(value)}
+    virtual void decrement(int value){Q_UNUSED(value)}
+
+protected slots:
+    virtual void parentScaleXChanged(qreal newValue){Q_UNUSED(newValue)}
+    virtual void parentScaleYChanged(qreal newValue){Q_UNUSED(newValue)}
+    virtual void parentRotationChanged(qreal newValue){Q_UNUSED(newValue)}
+    virtual void parentTranslateXChanged(qreal newValue){Q_UNUSED(newValue)}
+    virtual void parentTranslateYChanged(qreal newValue){Q_UNUSED(newValue)}
+
 protected:
+    AbstractItem *_parentItem;
+    qreal _parentScaleXValue;
+    qreal _parentScaleYValue;
+    qreal _parentRotateValue;
+    qreal _parentTranslateXValue;
+    qreal _parentTranslateYValue;
+
     QSvgRenderer *_renderer;
     int _type;
     qreal _minAngle;
@@ -119,6 +122,8 @@ protected:
     qreal maxScale() const;
     void setMinScale(qreal v);
     void setMaxScale(qreal v);
+
+
 };
 
 #endif // ABSTRACTITEM_H
