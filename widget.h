@@ -15,8 +15,9 @@
 #include "OutriggerItem.h"
 #include "PillarItem.h"
 #include "OtherItem.h"
-#include "LeftCrutchItem.h"
-#include "RightCrutchItem.h"
+//#include "LeftCrutchItem.h"
+//#include "RightCrutchItem.h"
+#include "CrutchItem.h"
 #include "EllipseOutriggerItem.h"
 #include "EllipseHookItem.h"
 
@@ -109,8 +110,8 @@ private slots:
 
 private:
     Ui::Widget *ui;
-    LeftCrutchItem *_leftCrutch;
-    RightCrutchItem *_rightCrutch;
+    CrutchItem *_leftCrutch;
+    CrutchItem *_rightCrutch;
     PillarItem *_pillar;
     DerrickItem *_derrick;
     OutriggerItem *_outrigger;

@@ -22,10 +22,9 @@ SOURCES += main.cpp\
     HookItem.cpp \
     PillarItem.cpp \
     OtherItem.cpp \
-    LeftCrutchItem.cpp \
-    RightCrutchItem.cpp \
     EllipseOutriggerItem.cpp \
-    EllipseHookItem.cpp
+    EllipseHookItem.cpp \
+    CrutchItem.cpp
 
 HEADERS  += widget.h \
     AbstractItem.h \
@@ -36,10 +35,9 @@ HEADERS  += widget.h \
     HookItem.h \
     PillarItem.h \
     OtherItem.h \
-    LeftCrutchItem.h \
-    RightCrutchItem.h \
     EllipseOutriggerItem.h \
-    EllipseHookItem.h
+    EllipseHookItem.h \
+    CrutchItem.h
 
 FORMS    += widget.ui
 

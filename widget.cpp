@@ -12,13 +12,13 @@ Widget::Widget(QWidget *parent) :
 //    qDebug() << renderer->elementExists("pillar") << renderer->elementExists("hook") << "";
 //    qDebug() << renderer->boundsOnElement("pillar").topLeft() << renderer->boundsOnElement("hook").topLeft();
 
-    _leftCrutch = new LeftCrutchItem(renderer);
+    _leftCrutch = new CrutchItem(AbstractItems::LeftCrutch, renderer);
     _leftCrutch->setMax(10);
     _leftCrutch->setCountSteps(5);
     ui->_verticalSliderLeftCrutch->setMaximum(5);
     ui->_verticalSliderLeftCrutch->setSingleStep(1);
 
-    _rightCrutch = new RightCrutchItem(renderer);
+    _rightCrutch = new CrutchItem(AbstractItems::RightCrutch, renderer);
     _rightCrutch->setMax(10);
     _rightCrutch->setCountSteps(5);
     ui->_verticalSliderRightCrutch->setMaximum(5);
