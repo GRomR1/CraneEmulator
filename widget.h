@@ -8,18 +8,22 @@
 #include <QtSvg/QSvgWidget>
 
 #include "AbstractItem.h"
-#include "RopeHookItem.h"
-#include "TelescopicItem.h"
-#include "DerrickItem.h"
-#include "HookItem.h"
-#include "OutriggerItem.h"
-#include "PillarItem.h"
-#include "OtherItem.h"
-//#include "LeftCrutchItem.h"
-//#include "RightCrutchItem.h"
-#include "CrutchItem.h"
-#include "EllipseOutriggerItem.h"
-#include "EllipseHookItem.h"
+#include "view-side\Side_RopeHookItem.h"
+#include "view-side\Side_TelescopicItem.h"
+#include "view-side\Side_DerrickItem.h"
+#include "view-side\Side_HookItem.h"
+#include "view-side\Side_OutriggerItem.h"
+#include "view-side\Side_PillarItem.h"
+#include "view-side\Side_OtherItem.h"
+#include "view-side\Side_CrutchItem.h"
+#include "view-side\Side_EllipseOutriggerItem.h"
+#include "view-side\Side_EllipseHookItem.h"
+
+#include "view-top\Top_TelescopicItem.h"
+#include "view-top\Top_DerrickItem.h"
+#include "view-top\Top_OutriggerItem.h"
+#include "view-top\Top_PillarItem.h"
+#include "view-top\Top_OtherItem.h"
 
 namespace Ui {
 class Widget;
@@ -44,7 +48,8 @@ protected:
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event)
     {
         emit clicked(event->scenePos());
-        QGraphicsScene::mousePressEvent(event);
+        event->accept();
+//        QGraphicsScene::mousePressEvent(event);
     }
 };
 
@@ -61,6 +66,7 @@ public:
 public slots:
     void addText(QString txt); //добавляет текст в окно для отладочных сообщение
     void sceneClicked(QPointF point); //добавляет точку в место клика на сцене
+    void sceneTopClicked(QPointF point); //добавляет точку в место клика на сцене сверху
 
 private slots:
     void drawPoint(QPointF p); //отображает зеленую точку в заданных координатах
@@ -108,6 +114,8 @@ private slots:
 
     void on__verticalSliderScale_valueChanged(int value); //обработчик слайдера масштаба
 
+    void on__pushButtonDebug_clicked();
+
 private:
     Ui::Widget *ui;
     Side::CrutchItem *_leftCrutch;
@@ -126,8 +134,19 @@ private:
 
     QGraphicsEllipseItem *_itemEllipse;
     QGraphicsEllipseItem *_itemEllipseForDebug;
+    QGraphicsEllipseItem *_itemEllipseTop;
     GraphicsScene *_scene;
+
+
+
+    Top::PillarItem *_pillarTop;
+    Top::OtherItem *_pillarRectTop;
+    Top::DerrickItem *_derrickTop;
+    Top::OutriggerItem *_outriggerTop;
+    Top::TelescopicItem *_telescopicTop;
+
     GraphicsScene *_sceneTop;
+
 };
 
 #endif // WIDGET_H

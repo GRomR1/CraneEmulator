@@ -1,9 +1,3 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2015-01-08T21:01:52
-#
-#-------------------------------------------------
-
 QT       += core gui svg
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -28,5 +22,3 @@ FORMS    += widget.ui
 
 RESOURCES += \
     resources.qrc
-
-OTHER_FILES +=

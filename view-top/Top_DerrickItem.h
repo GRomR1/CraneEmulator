@@ -1,15 +1,14 @@
-#ifndef TELESCOPICITEM_H
-#define TELESCOPICITEM_H
+#ifndef DERRICKITEMTOP_H
+#define DERRICKITEMTOP_H
 
 #include "../AbstractItem.h"
-namespace Side {
+namespace Top {
 
-class TelescopicItem : public AbstractItem
+class DerrickItem : public AbstractItem
 {
     Q_OBJECT
-
 public:
-    explicit TelescopicItem(QSvgRenderer *renderer, QGraphicsItem *parent = 0);
+    explicit DerrickItem(QSvgRenderer *renderer, QGraphicsItem *parent = 0);
     virtual void resetCurrentState();
 
     virtual qreal min() const;
@@ -23,15 +22,14 @@ public slots:
     virtual void increment(int value);
     virtual void decrement(int value);
 
+protected slots:
+    virtual void parentRotationChanged(qreal newValue);
+
 protected:
     virtual void compareAndSetState(qreal newState);
-
-protected slots:
-    virtual void parentScaleXChanged(qreal newValue);
-    virtual void parentRotationChanged(qreal newValue);
 
 };
 
 }
 
-#endif // TELESCOPICITEM_H
+#endif // DERRICKITEMTOP_H

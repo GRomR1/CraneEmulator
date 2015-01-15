@@ -1,14 +1,14 @@
-#ifndef CRUTCHITEM_H
-#define CRUTCHITEM_H
+#ifndef OUTRIGGERITEMTOP_H
+#define OUTRIGGERITEMTOP_H
 
 #include "../AbstractItem.h"
-namespace Side {
+namespace Top {
 
-class CrutchItem : public AbstractItem
+class OutriggerItem : public AbstractItem
 {
     Q_OBJECT
 public:
-    explicit CrutchItem(int type, QSvgRenderer *renderer, QGraphicsItem *parent = 0);
+    explicit OutriggerItem(QSvgRenderer *renderer, QGraphicsItem *parent = 0);
     virtual void resetCurrentState();
 
     virtual qreal min() const;
@@ -22,6 +22,10 @@ public slots:
     virtual void increment(int value);
     virtual void decrement(int value);
 
+protected slots:
+    virtual void parentScaleXChanged(qreal newValue);
+    virtual void parentRotationChanged(qreal newValue);
+
 protected:
     virtual void compareAndSetState(qreal newState);
 
@@ -29,5 +33,4 @@ protected:
 
 }
 
-
-#endif // CRUTCHITEM_H
+#endif // OUTRIGGERITEMTOP_H

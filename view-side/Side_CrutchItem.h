@@ -1,14 +1,14 @@
-#ifndef ROPEHOOKITEM_H
-#define ROPEHOOKITEM_H
+#ifndef CRUTCHITEMSIDE_H
+#define CRUTCHITEMSIDE_H
 
 #include "../AbstractItem.h"
 namespace Side {
 
-class RopeHookItem : public AbstractItem
+class CrutchItem : public AbstractItem
 {
     Q_OBJECT
 public:
-    explicit RopeHookItem(QSvgRenderer *renderer, QGraphicsItem *parent = 0);
+    explicit CrutchItem(int type, QSvgRenderer *renderer, QGraphicsItem *parent = 0);
     virtual void resetCurrentState();
 
     virtual qreal min() const;
@@ -22,21 +22,12 @@ public slots:
     virtual void increment(int value);
     virtual void decrement(int value);
 
-signals:
-    void minIsReached();
-    void stopMinIsReached();
-
 protected:
-    bool _minIsReached;
     virtual void compareAndSetState(qreal newState);
-
-protected slots:
-    virtual void parentScaleXChanged(qreal newValue);
-    virtual void parentRotationChanged(qreal newValue);
-    virtual void parentTranslateXChanged(qreal newValue);
 
 };
 
 }
 
-#endif // ROPEHOOKITEM_H
+
+#endif // CRUTCHITEMSIDE_H

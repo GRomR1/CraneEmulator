@@ -1,8 +1,8 @@
-#ifndef PILLARITEM_H
-#define PILLARITEM_H
+#ifndef PILLARITEMTOP_H
+#define PILLARITEMTOP_H
 
 #include "../AbstractItem.h"
-namespace Side {
+namespace Top {
 
 class PillarItem : public AbstractItem
 {
@@ -28,4 +28,4 @@ protected:
 
 }
 
-#endif // PILLARITEM_H
+#endif // PILLARITEMTOP_H

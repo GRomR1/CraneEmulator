@@ -1,5 +1,5 @@
-#ifndef ELLIPSEOUTRIGGERITEM_H
-#define ELLIPSEOUTRIGGERITEM_H
+#ifndef ELLIPSEOUTRIGGERITEMSIDE_H
+#define ELLIPSEOUTRIGGERITEMSIDE_H
 
 #include "../AbstractItem.h"
 namespace Side {
@@ -18,4 +18,4 @@ protected slots:
 
 }
 
-#endif // ELLIPSEOUTRIGGERITEM_H
+#endif // ELLIPSEOUTRIGGERITEMSIDE_H

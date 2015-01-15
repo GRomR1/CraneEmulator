@@ -1,4 +1,4 @@
-#include "OutriggerItem.h"
+#include "Side_OutriggerItem.h"
 
 using namespace Side;
 

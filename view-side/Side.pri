@@ -1,30 +1,22 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2015-01-08T21:01:52
-#
-#-------------------------------------------------
-INCLUDEPATH += $$PWD
-DEPENDPATH  += $$PWD
-
-SOURCES += $$PWD/RopeHookItem.cpp \
-    $$PWD/TelescopicItem.cpp \
-    $$PWD/DerrickItem.cpp \
-    $$PWD/OutriggerItem.cpp \
-    $$PWD/HookItem.cpp \
-    $$PWD/PillarItem.cpp \
-    $$PWD/OtherItem.cpp \
-    $$PWD/EllipseOutriggerItem.cpp \
-    $$PWD/EllipseHookItem.cpp \
-    $$PWD/CrutchItem.cpp \
+SOURCES += $$PWD/Side_RopeHookItem.cpp \
+    $$PWD/Side_TelescopicItem.cpp \
+    $$PWD/Side_DerrickItem.cpp \
+    $$PWD/Side_OutriggerItem.cpp \
+    $$PWD/Side_HookItem.cpp \
+    $$PWD/Side_PillarItem.cpp \
+    $$PWD/Side_OtherItem.cpp \
+    $$PWD/Side_EllipseOutriggerItem.cpp \
+    $$PWD/Side_EllipseHookItem.cpp \
+    $$PWD/Side_CrutchItem.cpp \
 
 HEADERS  += $$PUBLIC_HEADERS \
-    $$PWD/RopeHookItem.h \
-    $$PWD/TelescopicItem.h \
-    $$PWD/DerrickItem.h \
-    $$PWD/OutriggerItem.h \
-    $$PWD/HookItem.h \
-    $$PWD/PillarItem.h \
-    $$PWD/OtherItem.h \
-    $$PWD/EllipseOutriggerItem.h \
-    $$PWD/EllipseHookItem.h \
-    $$PWD/CrutchItem.h
+    $$PWD/Side_RopeHookItem.h \
+    $$PWD/Side_TelescopicItem.h \
+    $$PWD/Side_DerrickItem.h \
+    $$PWD/Side_OutriggerItem.h \
+    $$PWD/Side_HookItem.h \
+    $$PWD/Side_PillarItem.h \
+    $$PWD/Side_OtherItem.h \
+    $$PWD/Side_EllipseOutriggerItem.h \
+    $$PWD/Side_EllipseHookItem.h \
+    $$PWD/Side_CrutchItem.h

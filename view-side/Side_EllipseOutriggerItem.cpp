@@ -1,4 +1,4 @@
-#include "EllipseOutriggerItem.h"
+#include "Side_EllipseOutriggerItem.h"
 
 using namespace Side;
 

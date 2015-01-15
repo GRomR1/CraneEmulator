@@ -1,14 +1,14 @@
-#ifndef DERRICKITEM_H
-#define DERRICKITEM_H
+#ifndef OUTRIGGERITEMSIDE_H
+#define OUTRIGGERITEMSIDE_H
 
 #include "../AbstractItem.h"
 namespace Side {
 
-class DerrickItem : public AbstractItem
+class OutriggerItem : public AbstractItem
 {
     Q_OBJECT
 public:
-    explicit DerrickItem(QSvgRenderer *renderer, QGraphicsItem *parent = 0);
+    explicit OutriggerItem(QSvgRenderer *renderer, QGraphicsItem *parent = 0);
     virtual void resetCurrentState();
 
     virtual qreal min() const;
@@ -24,6 +24,7 @@ public slots:
 
 protected slots:
     virtual void parentScaleXChanged(qreal newValue);
+    virtual void parentRotationChanged(qreal newValue);
 
 protected:
     virtual void compareAndSetState(qreal newState);
@@ -32,4 +33,4 @@ protected:
 
 }
 
-#endif // DERRICKITEM_H
+#endif // OUTRIGGERITEMSIDE_H

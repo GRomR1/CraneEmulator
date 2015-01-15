@@ -16,7 +16,7 @@ enum TypeItem
     LeftCrutch = QGraphicsItem::UserType + 1,
     RightCrutch,
     Pillar,
-    EllipseDerick,
+    EllipseDerick, RectPillar,
     Derrick,
     EllipseOutrigger,
     Outrigger,
@@ -48,6 +48,7 @@ public:
     qreal value() const;
     int countSteps() const;
     qreal currentStep() const;
+    qreal currentState() const;
     virtual void setCountSteps(int count);
 
     QPointF basicPos();

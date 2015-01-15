@@ -8,14 +8,13 @@ Widget::Widget(QWidget *parent) :
 {
     ui->setupUi(this);
     _scene = new GraphicsScene(QRectF(0, 30, 220, 150));
-    _sceneTop = new GraphicsScene(QRectF(0, 0, 220, 120));
+    _sceneTop = new GraphicsScene(QRectF(-18, 30, 170, 170));
     QSvgRenderer *renderer = new QSvgRenderer(QString(":/Кран_ВидCбоку.svg"));
-//    QSvgRenderer *rendererTop = new QSvgRenderer(QString(":/Кран_ВидСверху.svg"));
-    QGraphicsSvgItem *item1Top = new QGraphicsSvgItem(QString(":/Кран_ВидСверху.svg"));
-    _sceneTop->addItem(item1Top);
+    QSvgRenderer *rendererTop = new QSvgRenderer(QString(":/Кран_ВидСверху.svg"));
+//    QGraphicsSvgItem *item1Top = new QGraphicsSvgItem(QString(":/Кран_ВидСверху.svg"));
+
 //    qDebug() << renderer->elementExists("pillar") << renderer->elementExists("hook") << "";
 //    qDebug() << renderer->boundsOnElement("pillar").topLeft() << renderer->boundsOnElement("hook").topLeft();
-
     _leftCrutch = new Side::CrutchItem(AbstractItems::LeftCrutch, renderer);
     _leftCrutch->setMax(10);
     _leftCrutch->setCountSteps(5);
@@ -29,26 +28,42 @@ Widget::Widget(QWidget *parent) :
     ui->_verticalSliderRightCrutch->setSingleStep(1);
 
     _pillar = new Side::PillarItem(renderer);
-    _pillar->setMax(50);
-    _pillar->setMin(-50);
-    _pillar->setCountSteps(10);
-    ui->_verticalSliderPillar->setMaximum(5);
-    ui->_verticalSliderPillar->setMinimum(-5);
+    _pillar->setMin(-45);
+    _pillar->setMax(45);
+    _pillar->setCountSteps(18);
+    ui->_verticalSliderPillar->setMaximum(9);
+    ui->_verticalSliderPillar->setMinimum(-9);
     ui->_verticalSliderPillar->setSingleStep(1);
     ui->_verticalSliderPillar->setValue(0);
+
+    _pillarTop = new Top::PillarItem(rendererTop);
+    _pillarTop->setMin(-45);
+    _pillarTop->setMax(45);
+    _pillarTop->setCountSteps(18);
+    _sceneTop->addItem(_pillarTop);
 
     _ellipseDerrick = new Side::OtherItem(AbstractItems::EllipseDerick, renderer);
     _ellipseDerrick->setId("ellipse_derrick");
 
+    _pillarRectTop = new Top::OtherItem(AbstractItems::RectPillar, rendererTop);
+    _pillarRectTop->setId("rect_pillar");
+    _sceneTop->addItem(_pillarRectTop);
+
     _derrick = new Side::DerrickItem(renderer);
-    _derrick->setFlags(QGraphicsItem::ItemStacksBehindParent /*|
-                        QGraphicsItem::ItemSendsGeometryChanges*/);
+    _derrick->setFlags(QGraphicsItem::ItemStacksBehindParent);
     _derrick->setMax(30);
     _derrick->setMin(0);
     _derrick->setCountSteps(15);
     _derrick->setParentItemMy(_pillar);
     ui->_verticalSliderDerrick->setMaximum(15);
     ui->_verticalSliderDerrick->setSingleStep(1);
+
+    _derrickTop = new Top::DerrickItem(rendererTop);
+    _derrickTop->setMax(30);
+    _derrickTop->setMin(0);
+    _derrickTop->setCountSteps(15);
+    _derrickTop->setParentItemMy(_pillarTop);
+    _sceneTop->addItem(_derrickTop);
 
     _ellipseOutrigger = new Side::EllipseOutriggerItem(renderer);
     _ellipseOutrigger->setParentItemMy(_derrick);
@@ -59,10 +74,16 @@ Widget::Widget(QWidget *parent) :
     _outrigger->setMax(0);
     _outrigger->setMin(-30);
     _outrigger->setCountSteps(15);
+    _outrigger->setParentItemMy(_ellipseOutrigger);
+    _outriggerTop = new Top::OutriggerItem(rendererTop);
+    _outriggerTop->setMax(0);
+    _outriggerTop->setMin(-30);
+    _outriggerTop->setCountSteps(15);
+    _outriggerTop->setParentItemMy(_derrickTop);
+    _sceneTop->addItem(_outriggerTop);
     ui->_verticalSliderOutrigger->setMaximum(15);
     ui->_verticalSliderOutrigger->setValue(15);
     ui->_verticalSliderOutrigger->setSingleStep(1);
-    _outrigger->setParentItemMy(_ellipseOutrigger);
 
     _telescopic = new Side::TelescopicItem(renderer);
     _telescopic->setFlags(QGraphicsItem::ItemStacksBehindParent);
@@ -73,6 +94,14 @@ Widget::Widget(QWidget *parent) :
     ui->_verticalSliderTelescopic->setValue(0);
     ui->_verticalSliderTelescopic->setSingleStep(1);
     _telescopic->setParentItemMy(_outrigger);
+
+    _telescopicTop = new Top::TelescopicItem(rendererTop);
+    _telescopicTop->setFlags(QGraphicsItem::ItemStacksBehindParent);
+    _telescopicTop->setMax(20);
+    _telescopicTop->setMin(0);
+    _telescopicTop->setCountSteps(10);
+    _telescopicTop->setParentItemMy(_outriggerTop);
+    _sceneTop->addItem(_telescopicTop);
 
     _ellipseHook = new Side::EllipseHookItem(renderer);
     _ellipseHook->setParentItemMy(_telescopic);
@@ -122,8 +151,10 @@ Widget::Widget(QWidget *parent) :
     ui->_view->setSceneRect(rect);
     ui->_view->setScene(_scene);
 
-    _sceneTop->setSceneRect(item1Top->boundingRect());
-    _sceneTop->addRect(item1Top->boundingRect(), QPen(Qt::green));
+    y=_derrickTop->pos().y()+_derrickTop->boundingRect().height()/2;
+    QRectF rect2(-14, y-110, _ground->boundingRect().width(), 2*110);
+    _sceneTop->setSceneRect(rect2);
+    _sceneTop->addRect(_sceneTop->sceneRect(), QPen(Qt::green));
     ui->_viewTop->setScene(_sceneTop);
 
 //    _scene->addLine(QLineF(0, 0, 300, 0), QPen(Qt::green, 0.5)); //horizontal (y1==y2)
@@ -131,9 +162,14 @@ Widget::Widget(QWidget *parent) :
 
     QPointF p(0,0);
     _itemEllipse = _scene->addEllipse(QRectF(p.x(),p.y(),1,1), QPen(Qt::NoPen), QBrush(Qt::red));
+
+    QPointF p2(0,0);
+//    p2=_derrickTop->pos();
+    _itemEllipseTop = _sceneTop->addEllipse(QRectF(p2.x(),p2.y(),1,1), QPen(Qt::NoPen), QBrush(Qt::red));
     connect(_scene, SIGNAL(clicked(QPointF)),
             this, SLOT(sceneClicked(QPointF)));
-
+    connect(_sceneTop, SIGNAL(clicked(QPointF)),
+            this, SLOT(sceneTopClicked(QPointF)));
     ui->_verticalSliderScale->setValue(25);
 }
 
@@ -142,13 +178,19 @@ Widget::~Widget()
     delete ui;
 }
 
+void Widget::on__verticalSliderScale_valueChanged(int value)
+{
+    ui->_view->resetTransform();
+    ui->_view->scale(value*1.0/10,value*1.0/10);
+    ui->_viewTop->resetTransform();
+    ui->_viewTop->scale(value*1.0/10,value*1.0/10);
+}
 
 void Widget::addText(QString txt)
 {
     ui->_ptEdit->appendPlainText(txt);
     ui->_ptEdit->centerCursor();
 }
-
 
 void Widget::sceneClicked(QPointF point)
 {
@@ -163,9 +205,25 @@ void Widget::sceneClicked(QPointF point)
     _itemEllipse->setPos(x-_itemEllipse->boundingRect().width()/2,
                          y-_itemEllipse->boundingRect().height()/2);
 
-//    qDebug() << _derrick->transformOriginPoint();
-//    _derrick->setTransformOriginPoint(_derrick->mapFromScene(point));
+    addText(str);
+}
 
+void Widget::sceneTopClicked(QPointF point)
+{
+    QString str;
+    str+="x=";
+    qreal x=point.x();
+    str+=QString().setNum(x);
+    str+=" y=";
+    qreal y=point.y();
+    str+=QString().setNum(y);
+
+    _itemEllipseTop->setPos(x-_itemEllipseTop->boundingRect().width()/2,
+                         y-_itemEllipseTop->boundingRect().height()/2);
+
+//    qDebug() << point;
+//    qDebug() << _derrickTop->transformOriginPoint();
+//    _derrickTop->setTransformOriginPoint(point);
     addText(str);
 }
 
@@ -321,55 +379,6 @@ void Widget::on__pushButtonRightCrutchMinus_clicked()
     addText(mes);
 }
 
-void Widget::on__verticalSliderScale_valueChanged(int value)
-{
-    ui->_view->resetTransform();
-    ui->_view->scale(value*1.0/10,value*1.0/10);
-}
-
-//void Widget::on__verticalSliderLeftCrutch_sliderReleased()
-//{
-//    QString mes("left crutch set ");
-//    _leftCrutch->resetCurrentState();
-//    int v = ui->_verticalSliderLeftCrutch->value();
-//    mes+=QString::number(v);
-//    _leftCrutch->increment(v);
-//    addText(mes);
-//}
-
-//void Widget::on__verticalSliderRightCrutch_sliderReleased()
-//{
-//    QString mes("right crutch set ");
-//    _rightCrutch->resetCurrentState();
-//    int v = ui->_verticalSliderRightCrutch->value();
-//    mes+=QString::number(v);
-//    _rightCrutch->increment(v);
-//    addText(mes);
-//}
-
-//void Widget::on__verticalSliderDerrick_sliderReleased()
-//{
-//    QString mes("derrick set ");
-//    _derrick->resetCurrentState();
-//    int v = ui->_verticalSliderDerrick->value();
-//    mes+=QString::number(v);
-//    if(v==0)
-//        _derrick->resetCurrentState();
-//    else
-//        _derrick->increment(v);
-//    addText(mes);
-//}
-
-//void Widget::on__verticalSliderOutrigger_sliderReleased()
-//{
-//    QString mes("outrigger set ");
-//    _outrigger->resetCurrentState();
-//    int v = ui->_verticalSliderOutrigger->maximum() - ui->_verticalSliderOutrigger->value();
-//    mes+=QString::number(v);
-//    _outrigger->decrement(v);
-//    addText(mes);
-//}
-
 void Widget::on__pushButtonPillarPlus_clicked()
 {
     QString mes("pillar +");
@@ -418,8 +427,10 @@ void Widget::on__verticalSliderTelescopic_valueChanged(int value)
 {
     QString mes("telescopic set ");
     _telescopic->resetCurrentState();
+    _telescopicTop->resetCurrentState();
     mes+=QString::number(value);
     _telescopic->increment(value);
+    _telescopicTop->increment(value);
     addText(mes);
 }
 
@@ -427,9 +438,11 @@ void Widget::on__verticalSliderOutrigger_valueChanged(int value)
 {
     QString mes("outrigger set ");
     _outrigger->resetCurrentState();
+    _outriggerTop->resetCurrentState();
     int v = ui->_verticalSliderOutrigger->maximum() - value;
     mes+=QString::number(v);
     _outrigger->decrement(v);
+    _outriggerTop->decrement(v);
     addText(mes);
 }
 
@@ -437,9 +450,11 @@ void Widget::on__verticalSliderDerrick_valueChanged(int value)
 {
     QString mes("derrick set ");
     _derrick->resetCurrentState();
+    _derrickTop->resetCurrentState();
     int v = value;
     mes+=QString::number(v);
     _derrick->increment(v);
+    _derrickTop->increment(v);
     addText(mes);
 }
 
@@ -447,12 +462,19 @@ void Widget::on__verticalSliderPillar_valueChanged(int value)
 {
     QString mes("pillar set ");
     _pillar->resetCurrentState();
+    _pillarTop->resetCurrentState();
     int v = value;
     mes+=QString::number(v);
     if(v>=0)
+    {
         _pillar->increment(v);
+        _pillarTop->increment(v);
+    }
     else
+    {
         _pillar->decrement(qAbs(v));
+        _pillarTop->decrement(qAbs(v));
+    }
     addText(mes);
 }
 
@@ -474,4 +496,13 @@ void Widget::on__verticalSliderLeftCrutch_valueChanged(int value)
     mes+=QString::number(v);
     _leftCrutch->increment(v);
     addText(mes);
+}
+
+void Widget::on__pushButtonDebug_clicked()
+{
+//    qreal min = _pillarTop->min();
+    qreal max = _pillarTop->max();
+    _pillarTop->setMax(180);
+    _pillarTop->increment();
+    _pillarTop->setMax(max);
 }

@@ -1,29 +1,12 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2015-01-08T21:01:52
-#
-#-------------------------------------------------
+SOURCES += $$PWD/Top_TelescopicItem.cpp \
+    $$PWD/Top_DerrickItem.cpp \
+    $$PWD/Top_OutriggerItem.cpp \
+    $$PWD/Top_PillarItem.cpp \
+    $$PWD/Top_OtherItem.cpp
 
-#SOURCES += AbstractItem.cpp \
-#    RopeHookItem.cpp \
-#    TelescopicItem.cpp \
-#    DerrickItem.cpp \
-#    OutriggerItem.cpp \
-#    HookItem.cpp \
-#    PillarItem.cpp \
-#    OtherItem.cpp \
-#    EllipseOutriggerItem.cpp \
-#    EllipseHookItem.cpp \
-#    CrutchItem.cpp
-
-#HEADERS  += AbstractItem.h \
-#    RopeHookItem.h \
-#    TelescopicItem.h \
-#    DerrickItem.h \
-#    OutriggerItem.h \
-#    HookItem.h \
-#    PillarItem.h \
-#    OtherItem.h \
-#    EllipseOutriggerItem.h \
-#    EllipseHookItem.h \
-#    CrutchItem.h
+HEADERS += $$PUBLIC_HEADERS \
+    $$PWD/Top_TelescopicItem.h \
+    $$PWD/Top_DerrickItem.h \
+    $$PWD/Top_OutriggerItem.h \
+    $$PWD/Top_PillarItem.h \
+    $$PWD/Top_OtherItem.h

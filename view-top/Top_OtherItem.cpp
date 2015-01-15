@@ -1,6 +1,6 @@
-#include "OtherItem.h"
+#include "Top_OtherItem.h"
 
-using namespace Side;
+using namespace Top;
 
 OtherItem::OtherItem(TypeItem typeItem, QSvgRenderer *renderer, QGraphicsItem *parent) :
     AbstractItem(renderer, parent)

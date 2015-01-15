@@ -1,23 +1,22 @@
-#ifndef HOOKITEM_H
-#define HOOKITEM_H
+#ifndef ELLIPSEHOOKITEMSIDE_H
+#define ELLIPSEHOOKITEMSIDE_H
 
 #include "../AbstractItem.h"
 namespace Side {
 
-class HookItem : public AbstractItem
+class EllipseHookItem : public AbstractItem
 {
     Q_OBJECT
 public:
-    explicit HookItem(QSvgRenderer *renderer, QGraphicsItem *parent = 0);
+    explicit EllipseHookItem(QSvgRenderer *renderer, QGraphicsItem *parent = 0);
 
 protected slots:
     virtual void parentScaleXChanged(qreal newValue);
     virtual void parentRotationChanged(qreal newValue);
     virtual void parentTranslateXChanged(qreal newValue);
-    virtual void parentScaleYChanged(qreal newValue);
 
 };
 
 }
 
-#endif // HOOKITEM_H
+#endif // ELLIPSEHOOKITEMSIDE_H

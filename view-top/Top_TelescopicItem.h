@@ -1,14 +1,15 @@
-#ifndef OUTRIGGERITEM_H
-#define OUTRIGGERITEM_H
+#ifndef TELESCOPICITEMTOP_H
+#define TELESCOPICITEMTOP_H
 
 #include "../AbstractItem.h"
-namespace Side {
+namespace Top {
 
-class OutriggerItem : public AbstractItem
+class TelescopicItem : public AbstractItem
 {
     Q_OBJECT
+
 public:
-    explicit OutriggerItem(QSvgRenderer *renderer, QGraphicsItem *parent = 0);
+    explicit TelescopicItem(QSvgRenderer *renderer, QGraphicsItem *parent = 0);
     virtual void resetCurrentState();
 
     virtual qreal min() const;
@@ -22,15 +23,15 @@ public slots:
     virtual void increment(int value);
     virtual void decrement(int value);
 
+protected:
+    virtual void compareAndSetState(qreal newState);
+
 protected slots:
     virtual void parentScaleXChanged(qreal newValue);
     virtual void parentRotationChanged(qreal newValue);
-
-protected:
-    virtual void compareAndSetState(qreal newState);
 
 };
 
 }
 
-#endif // OUTRIGGERITEM_H
+#endif // TELESCOPICITEMTOP_H

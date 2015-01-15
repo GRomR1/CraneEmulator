@@ -109,6 +109,10 @@ qreal AbstractItem::currentStep() const
 {
     return _currentStep;
 }
+qreal AbstractItem::currentState() const
+{
+    return _currentState;
+}
 void AbstractItem::setCountSteps(int count)
 {
     if(count <= 0)

@@ -1,5 +1,5 @@
-#ifndef OTHERITEM_H
-#define OTHERITEM_H
+#ifndef OTHERITEMSIDE_H
+#define OTHERITEMSIDE_H
 
 #include "../AbstractItem.h"
 namespace Side {
@@ -13,4 +13,4 @@ public:
 
 }
 
-#endif // OTHERITEM_H
+#endif // OTHERITEMSIDE_H

@@ -1,6 +1,6 @@
-#include "DerrickItem.h"
+#include "Top_DerrickItem.h"
 
-using namespace Side;
+using namespace Top;
 
 DerrickItem::DerrickItem(QSvgRenderer *renderer, QGraphicsItem *parent) :
     AbstractItem(renderer, parent)
@@ -9,6 +9,8 @@ DerrickItem::DerrickItem(QSvgRenderer *renderer, QGraphicsItem *parent) :
     setId("derrick");
 
     QPointF p(0, boundingRect().height()/2);
+//    qDebug() << p;
+    p.rx()+=5;
     setTransformOriginPoint(p);
 }
 
@@ -94,16 +96,17 @@ void DerrickItem::setMax(qreal v)
     setMaxAngle(v);
 }
 
-void DerrickItem::parentScaleXChanged(qreal newValue)
+void DerrickItem::parentRotationChanged(qreal newValue)
 {
-    _parentScaleXValue=newValue;
+//    qDebug() << _parentRotateValue << newValue << transformOriginPoint();
+    _parentRotateValue=newValue;
 
+    qreal cosValue = cos((double)_currentState*M_PI/180.);
     QTransform trans;
-    trans.rotate(_currentState);
-    trans.scale(_parentScaleXValue,1);
+    trans.scale(_parentScaleXValue*cosValue,1);
     setTransform(trans);
-
-    emit scaleXChanged(_parentScaleXValue);
+    setRotation(_parentRotateValue);
+    emit rotationChanged(_parentRotateValue);
 }
 
 
@@ -112,10 +115,11 @@ void DerrickItem::compareAndSetState(qreal newState)
     if(!qFuzzyCompare(100 + _currentState, 100 + newState))
     {
         _currentState = newState;
+        qreal cosValue = cos((double)_currentState*M_PI/180.);
         QTransform trans;
-        trans.rotate(_currentState);
-        trans.scale(_parentScaleXValue,1);
+        trans.scale(_parentScaleXValue*cosValue,1);
         setTransform(trans);
-        emit rotationChanged(_currentState);
+        setRotation(_parentRotateValue);
+        emit scaleXChanged(_parentScaleXValue*cosValue);
     }
 }
