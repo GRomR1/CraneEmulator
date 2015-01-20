@@ -3,6 +3,10 @@
 
 #include <QMainWindow>
 
+#include "CraneWidget.h"
+#include "PortSelector.h"
+#include "PortListener.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -15,8 +19,25 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+public slots:
+    void translateMessage(Element,quint8);
+
 private:
+    PortSelector *portSelector;
+    PortListener *portListener;
+    CraneWidget *craneWidget;
     Ui::MainWindow *ui;
+
+private slots:
+    void sendPowerOn();
+    void sendPowerOff();
+    void sendLightOn();
+    void sendLightOff();
+    void sendTemperatureHigh();
+    void sendTemperatureNormal();
+    void sendHookIsWarning();
+    void sendHookIsNormal();
+
 };
 
 #endif // MAINWINDOW_H

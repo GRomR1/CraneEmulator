@@ -6,19 +6,34 @@ TARGET = CraneEmulator
 TEMPLATE = app
 
 INCLUDEPATH += view-top \
-               view-side
-
+               view-side \
+               qextserialport-1.2rc
 include(view-top/Top.pri)
 include(view-side/Side.pri)
+include(qextserialport-1.2rc/qextserialport.pri)
+
 
 SOURCES += main.cpp \
-        widget.cpp \
-        AbstractItem.cpp
+        AbstractItem.cpp \
+    PortSelector.cpp \
+    PortListener.cpp \
+    MainWindow.cpp \
+    CraneWidget.cpp
 
-HEADERS  += widget.h \
-        AbstractItem.h
+HEADERS  += \
+        AbstractItem.h \
+    PortSelector.h \
+    PortListener.h \
+    MainWindow.h \
+    ../Defines.h \
+    CraneWidget.h
 
-FORMS    += widget.ui
+FORMS    += \
+    PortSelector.ui \
+    MainWindow.ui \
+    CraneWidget.ui
 
 RESOURCES += \
     resources.qrc
+
+QMAKE_LFLAGS += -static -static-libgcc

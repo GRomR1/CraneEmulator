@@ -125,7 +125,7 @@ void RopeHookItem::compareAndSetState(qreal newState)
             if(!_minIsReached)
             {
                 emit minIsReached();
-                _minIsReached = true;
+                _minIsReached=true;
             }
         }
         else
