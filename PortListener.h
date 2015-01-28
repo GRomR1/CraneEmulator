@@ -21,15 +21,21 @@ public slots:
 signals:
     void receivedMessage(Element el, quint8 mes);
     void event(QString);                            //сигнал о событии
-
+    void clientConnected(QString name, QString address);
+                                                    //подключился клиент
 private:
-    QextSerialPort *_port;                          //последовательный порт
-    QByteArray _arr;
+    QextSerialPort          *_port;                 //последовательный порт
+    QByteArray               _arr;
+    QByteArray               _arrForInitialize;
+    QByteArray               _arrDeviceInfo;
+    bool                     _bDeviceIsConnected;
+    bool                     _bLocalInfoIsSended;   //пора принимать инфу о клиенте
+    int                      _i;
+
     void connectPort();                             //подключение к порту
-    void writeToPort();                             //запись в порт
 
 private slots:
-    void receive();                                 //считывание данных из порта
+    void readSocket();                              //считывание данных из порта
     void reportClose();                             //сообщить о закрытии порта
     void reportDsr(bool status);                    //сообщить о подключении/отключении устройства от порта
 

@@ -1,6 +1,8 @@
 #include "CraneWidget.h"
 #include "ui_CraneWidget.h"
 
+static const int multiplier = 10; //множитель шагов
+
 CraneWidget::CraneWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::CraneWidget),
@@ -17,29 +19,29 @@ CraneWidget::CraneWidget(QWidget *parent) :
 //    qDebug() << renderer->boundsOnElement("pillar").topLeft() << renderer->boundsOnElement("hook").topLeft();
     _leftCrutch = new Side::CrutchItem(AbstractItems::LeftCrutch, renderer);
     _leftCrutch->setMax(10);
-    _leftCrutch->setCountSteps(5);
-    ui->_verticalSliderLeftCrutch->setMaximum(5);
+    _leftCrutch->setCountSteps(5*multiplier);
+    ui->_verticalSliderLeftCrutch->setMaximum(5*multiplier);
     ui->_verticalSliderLeftCrutch->setSingleStep(1);
 
     _rightCrutch = new Side::CrutchItem(AbstractItems::RightCrutch, renderer);
     _rightCrutch->setMax(10);
-    _rightCrutch->setCountSteps(5);
-    ui->_verticalSliderRightCrutch->setMaximum(5);
+    _rightCrutch->setCountSteps(5*multiplier);
+    ui->_verticalSliderRightCrutch->setMaximum(5*multiplier);
     ui->_verticalSliderRightCrutch->setSingleStep(1);
 
     _pillar = new Side::PillarItem(renderer);
     _pillar->setMin(-45);
     _pillar->setMax(45);
-    _pillar->setCountSteps(18);
-    ui->_verticalSliderPillar->setMaximum(9);
-    ui->_verticalSliderPillar->setMinimum(-9);
+    _pillar->setCountSteps(18*multiplier);
+    ui->_verticalSliderPillar->setMaximum(9*multiplier/2);
+    ui->_verticalSliderPillar->setMinimum(-9*multiplier/2);
     ui->_verticalSliderPillar->setSingleStep(1);
     ui->_verticalSliderPillar->setValue(0);
 
     _pillarTop = new Top::PillarItem(rendererTop);
     _pillarTop->setMin(-45);
     _pillarTop->setMax(45);
-    _pillarTop->setCountSteps(18);
+    _pillarTop->setCountSteps(18*multiplier);
     _sceneTop->addItem(_pillarTop);
 
     _ellipseDerrick = new Side::OtherItem(AbstractItems::EllipseDerick, renderer);
@@ -53,15 +55,15 @@ CraneWidget::CraneWidget(QWidget *parent) :
     _derrick->setFlags(QGraphicsItem::ItemStacksBehindParent);
     _derrick->setMax(30);
     _derrick->setMin(0);
-    _derrick->setCountSteps(15);
+    _derrick->setCountSteps(15*multiplier);
     _derrick->setParentItemMy(_pillar);
-    ui->_verticalSliderDerrick->setMaximum(15);
+    ui->_verticalSliderDerrick->setMaximum(15*multiplier);
     ui->_verticalSliderDerrick->setSingleStep(1);
 
     _derrickTop = new Top::DerrickItem(rendererTop);
     _derrickTop->setMax(30);
     _derrickTop->setMin(0);
-    _derrickTop->setCountSteps(15);
+    _derrickTop->setCountSteps(15*multiplier);
     _derrickTop->setParentItemMy(_pillarTop);
     _sceneTop->addItem(_derrickTop);
 
@@ -73,24 +75,24 @@ CraneWidget::CraneWidget(QWidget *parent) :
     _outrigger->setFlags(QGraphicsItem::ItemStacksBehindParent);
     _outrigger->setMax(0);
     _outrigger->setMin(-30);
-    _outrigger->setCountSteps(15);
+    _outrigger->setCountSteps(15*multiplier);
     _outrigger->setParentItemMy(_ellipseOutrigger);
     _outriggerTop = new Top::OutriggerItem(rendererTop);
     _outriggerTop->setMax(0);
     _outriggerTop->setMin(-30);
-    _outriggerTop->setCountSteps(15);
+    _outriggerTop->setCountSteps(15*multiplier);
     _outriggerTop->setParentItemMy(_derrickTop);
     _sceneTop->addItem(_outriggerTop);
-    ui->_verticalSliderOutrigger->setMaximum(15);
-    ui->_verticalSliderOutrigger->setValue(15);
+    ui->_verticalSliderOutrigger->setMaximum(15*multiplier);
+    ui->_verticalSliderOutrigger->setValue(15*multiplier);
     ui->_verticalSliderOutrigger->setSingleStep(1);
 
     _telescopic = new Side::TelescopicItem(renderer);
     _telescopic->setFlags(QGraphicsItem::ItemStacksBehindParent);
     _telescopic->setMax(20);
     _telescopic->setMin(0);
-    _telescopic->setCountSteps(10);
-    ui->_verticalSliderTelescopic->setMaximum(10);
+    _telescopic->setCountSteps(10*multiplier);
+    ui->_verticalSliderTelescopic->setMaximum(10*multiplier);
     ui->_verticalSliderTelescopic->setValue(0);
     ui->_verticalSliderTelescopic->setSingleStep(1);
     _telescopic->setParentItemMy(_outrigger);
@@ -99,7 +101,7 @@ CraneWidget::CraneWidget(QWidget *parent) :
     _telescopicTop->setFlags(QGraphicsItem::ItemStacksBehindParent);
     _telescopicTop->setMax(20);
     _telescopicTop->setMin(0);
-    _telescopicTop->setCountSteps(10);
+    _telescopicTop->setCountSteps(10*multiplier);
     _telescopicTop->setParentItemMy(_outriggerTop);
     _sceneTop->addItem(_telescopicTop);
 
@@ -114,9 +116,9 @@ CraneWidget::CraneWidget(QWidget *parent) :
     _ropeHook->setParentItemMy(_ellipseHook);
     _ropeHook->setMax(51);
     _ropeHook->setMin(1);
-    _ropeHook->setCountSteps(20);
+    _ropeHook->setCountSteps(20*multiplier);
     _ropeHook->setValue(1.1);
-    ui->_verticalSliderRopeHook->setMaximum(20);
+    ui->_verticalSliderRopeHook->setMaximum(20*multiplier);
     ui->_verticalSliderRopeHook->setSingleStep(1);
     connect(_ropeHook, SIGNAL(minIsReached()),
             this, SLOT(showHookWarning()));
@@ -171,6 +173,9 @@ CraneWidget::CraneWidget(QWidget *parent) :
     connect(_sceneTop, SIGNAL(clicked(QPointF)),
             this, SLOT(sceneTopClicked(QPointF)));
     ui->_verticalSliderScale->setValue(25);
+
+    QString str = ui->_labelClientInfo->text();
+    ui->_labelClientInfo->setText("<FONT COLOR = RED>"+str+"</FONT>");
 }
 
 CraneWidget::~CraneWidget()
@@ -252,37 +257,37 @@ void CraneWidget::telescopicDown(int value)
 void CraneWidget::hookUp(int value)
 {
     for(int i=0; i<value; i++)
-        on__pushButtonRopeHookPlus_clicked();
+        on__pushButtonRopeHookMinus_clicked();
 }
 
 void CraneWidget::hookDown(int value)
 {
     for(int i=0; i<value; i++)
-        on__pushButtonRopeHookMinus_clicked();
+        on__pushButtonRopeHookPlus_clicked();
 }
 
 void CraneWidget::leftCrutchUp(int value)
 {
     for(int i=0; i<value; i++)
-        on__pushButtonLeftCrutchPlus_clicked();
+        on__pushButtonLeftCrutchMinus_clicked();
 }
 
 void CraneWidget::leftCrutchDown(int value)
 {
     for(int i=0; i<value; i++)
-        on__pushButtonLeftCrutchMinus_clicked();
+        on__pushButtonLeftCrutchPlus_clicked();
 }
 
 void CraneWidget::rightCrutchUp(int value)
 {
     for(int i=0; i<value; i++)
-        on__pushButtonRightCrutchPlus_clicked();
+        on__pushButtonRightCrutchMinus_clicked();
 }
 
 void CraneWidget::rightCrutchDown(int value)
 {
     for(int i=0; i<value; i++)
-        on__pushButtonRightCrutchMinus_clicked();
+        on__pushButtonRightCrutchPlus_clicked();
 }
 
 
@@ -333,6 +338,12 @@ void CraneWidget::sceneTopClicked(QPointF point)
 //    qDebug() << _derrickTop->transformOriginPoint();
 //    _derrickTop->setTransformOriginPoint(point);
     addText(str);
+}
+
+void CraneWidget::setClientInfo(QString name, QString address)
+{
+    QString str = "Client connected: " + name + " (" + address + ")";
+    ui->_labelClientInfo->setText("<FONT COLOR = GREEN>"+str+"</FONT>");
 }
 
 void CraneWidget::drawPoint(QPointF p)

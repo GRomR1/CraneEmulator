@@ -36,6 +36,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(craneWidget, SIGNAL(hookIsNormal()),
             this, SLOT(sendHookIsNormal()));
 
+    connect(portListener, SIGNAL(clientConnected(QString,QString)),
+            craneWidget, SLOT(setClientInfo(QString,QString)));
     setCentralWidget(craneWidget);
 }
 

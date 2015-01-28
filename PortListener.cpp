@@ -1,10 +1,13 @@
 #include "PortListener.h"
 
 PortListener::PortListener(QObject *parent) :
-    QObject(parent)
+    QObject(parent),
+    _bDeviceIsConnected(false),
+    _bLocalInfoIsSended(false)
 {
     _port = new QextSerialPort();    //создание порта
     _port->open(QIODevice::NotOpen); //открытие порта
+    _i = 0;
 }
 
 void PortListener::setPortSettings(QString PortName, PortSettings settings)
@@ -24,7 +27,7 @@ void PortListener::connectPort()
 {
     //открытие порта
     _port->open(QIODevice::ReadWrite);
-    connect(_port, SIGNAL(readyRead()), this, SLOT(receive()));
+    connect(_port, SIGNAL(readyRead()), this, SLOT(readSocket()));
     connect(_port, SIGNAL(aboutToClose()), this, SLOT(reportClose()));
     connect(_port, SIGNAL(dsrChanged(bool)), this, SLOT(reportDsr(bool)));
 
@@ -34,40 +37,92 @@ void PortListener::connectPort()
 //    }
 }
 
-void PortListener::receive()
+void PortListener::readSocket()
 {
     QByteArray arr = _port->readAll();
-    if(QByteArray(_arr+arr).size()>=2)
+    //qDebug() << _i++ << ": " << arr.size();
+
+    if(_bDeviceIsConnected)
     {
-        while(arr.size()>0)
+        if(QByteArray(_arr+arr).size()>=2)
         {
-            QByteArray newArr(arr);
-            if(_arr.size()==0)
+            while(arr.size()>0)
             {
-                newArr.truncate(2);
-                _arr=newArr;
-                arr.remove(0,2);
+                QByteArray newArr(arr);
+                if(_arr.size()==0)
+                {
+                    newArr.truncate(2);
+                    _arr=newArr;
+                    arr.remove(0,2);
+                }
+                else
+                {   //if(_arr.size()==1)
+                    newArr.truncate(1);
+                    _arr=_arr+newArr;
+                    arr.remove(0,1);
+                }
+                if(_arr.size()>=2)
+                {
+                    QDataStream in(&_arr, QIODevice::ReadOnly);
+                    quint8 el;
+                    quint8 mes;
+                    in >> el >> mes;
+                    emit receivedMessage((Element)el, mes);
+                    qDebug() << "readed from port: " << _arr.toHex();
+                    _arr.clear();
+                }
             }
-            else
-            {   //if(_arr.size()==1)
-                newArr.truncate(1);
-                _arr=_arr+newArr;
-                arr.remove(0,1);
-            }
-            if(_arr.size()>=2)
+        }
+        else
+            _arr+=arr;
+    }
+    else
+    {
+        _arrForInitialize+=arr;
+        if(!_bLocalInfoIsSended)
+        {
+            while((size_t)_arrForInitialize.size()>=sizeof(quint64))
             {
-                QDataStream in(&_arr, QIODevice::ReadOnly);
-                quint8 el;
-                quint8 mes;
-                in >> el >> mes;
-                emit receivedMessage((Element)el, mes);
-                qDebug() << "readed from port: " << _arr.toHex();
-                _arr.clear();
+                QByteArray newArr(_arrForInitialize); //хранит массив 64 бита
+                newArr.truncate(sizeof(quint64));
+                //qDebug() << "received: " << newArr.toHex();
+                if(newArr == QByteArray::fromHex(QByteArray::number(Preamble, 16)))
+                {
+                    //пора читать инфу
+                    _bLocalInfoIsSended = true;
+                    _arrForInitialize.remove(0,sizeof(quint64));
+                    break;
+                }
+                _arrForInitialize.remove(0,1);
+            }
+        }
+        else
+        {
+            while((size_t)_arrForInitialize.size()>=sizeof(quint64))
+            {
+                QByteArray newArr(_arrForInitialize);
+                newArr.truncate(sizeof(quint64));
+                //qDebug() << "received: " << newArr.toHex();
+                if(newArr == QByteArray::fromHex(QByteArray::number(Preamble, 16)))
+                {
+                    //инфа прочитана
+                    _bLocalInfoIsSended = false;
+                    _arrForInitialize.remove(0,sizeof(quint64));
+                    _bDeviceIsConnected = true;
+                    QDataStream in(&_arrDeviceInfo, QIODevice::ReadOnly);
+                    QString name;
+                    QString addr;
+                    in >> name >> addr;
+                    //qDebug() << "Info is readed: " << _arrDeviceInfo.toHex() << "[" << _arrDeviceInfo.size() << "]";
+                    //qDebug() << name << addr;
+                    emit clientConnected(name, addr);
+                    break;
+                }
+                _arrDeviceInfo += _arrForInitialize.left(1);
+                _arrForInitialize.remove(0,1);
             }
         }
     }
-    else
-       _arr+=arr;
 }
 
 void PortListener::sendMessage(Element el, quint8 mes)

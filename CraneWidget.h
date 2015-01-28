@@ -85,6 +85,7 @@ public slots:
     void addText(QString txt); //добавляет текст в окно для отладочных сообщение
     void sceneClicked(QPointF point); //добавляет точку в место клика на сцене
     void sceneTopClicked(QPointF point); //добавляет точку в место клика на сцене сверху
+    void setClientInfo(QString name, QString address); //присвоить имя и адрес клиента
 
 signals:
     void signalPowerOn();
@@ -163,8 +164,6 @@ private:
     QGraphicsEllipseItem *_itemEllipseForDebug;
     QGraphicsEllipseItem *_itemEllipseTop;
     GraphicsScene *_scene;
-
-
 
     Top::PillarItem *_pillarTop;
     Top::OtherItem *_pillarRectTop;
