@@ -25,6 +25,8 @@ enum TypeItem
     RopeHook,
     Hook,
     Ground,
+    LightOn,
+    LampLight,
     Abstract
 };
 }

@@ -39,6 +39,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(portListener, SIGNAL(clientConnected(QString,QString)),
             craneWidget, SLOT(setClientInfo(QString,QString)));
     setCentralWidget(craneWidget);
+
+    connect(ui->actionSettings_port, SIGNAL(triggered()),
+            portSelector, SLOT(show()));
 }
 
 MainWindow::~MainWindow()
@@ -48,7 +51,6 @@ MainWindow::~MainWindow()
     delete craneWidget;
     delete ui;
 }
-
 
 void MainWindow::translateMessage(Element el,quint8 mes)
 {
@@ -148,4 +150,13 @@ void MainWindow::sendHookIsWarning()
 void MainWindow::sendHookIsNormal()
 {
     portListener->sendMessage(hookWarning, 0x00);
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    QString text;
+    text.append(tr("<p><h3>Эмулятор крана</h3></p>"));
+    text.append(tr("<p>Программу разработал <a href='https://www.blogger.com/profile/05001160230860564687'>Гайнанов Руслан</a>, студент гр.ЭВТ-11, ПНИПУ</p>"));
+    text.append(tr("<p><br />Связаться с автором: <a href='mailto:ruslan.r.gainanov@gmail.com'>ruslan.r.gainanov@gmail.com</a></p>"));
+    QMessageBox::about(this, tr("About"), text);
 }

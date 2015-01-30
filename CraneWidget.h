@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QtWidgets>
+#include <QSound>
 #include <QtSvg/QGraphicsSvgItem>
 #include <QtSvg/QSvgRenderer>
 #include <QtSvg/QSvgWidget>
@@ -18,12 +19,16 @@
 #include "view-side\Side_CrutchItem.h"
 #include "view-side\Side_EllipseOutriggerItem.h"
 #include "view-side\Side_EllipseHookItem.h"
+#include "view-side\Side_LightItem.h"
 
 #include "view-top\Top_TelescopicItem.h"
 #include "view-top\Top_DerrickItem.h"
 #include "view-top\Top_OutriggerItem.h"
 #include "view-top\Top_PillarItem.h"
 #include "view-top\Top_OtherItem.h"
+#include "view-top\Top_LightItem.h"
+
+#include "../Defines.h"
 
 namespace Ui {
 class CraneWidget;
@@ -65,8 +70,8 @@ public:
 
 public slots:
     void powerOn(bool b);           ///< Питание (вкл/выкл) (1/0)
-    void lightOn(bool b);           ///< Гудок (вкл/выкл) (1/0)
-    void soundSignalOn(bool b);     ///< Питание (вкл/выкл) (1/0)
+    void lightOn(bool b);           ///< Свет (вкл/выкл) (1/0)
+    void soundSignalOn(bool b);     ///< Гудок (вкл/выкл) (1/0)
     void pillarUp(int value);       ///< Поворот стойки - по часовой стрелке (1..9)
     void pillarDown(int value);     ///< Поворот стойки - против часовой стрелке (1..9)
     void derrickUp(int value);      ///< Подъемная стрела - подъем (1..9)
@@ -101,13 +106,15 @@ private slots:
     void drawPoint(QPointF p); //отображает зеленую точку в заданных координатах
     void showHookWarning(); //показ сообщения о опасности накручивания троса
     void stopHookWarning(); //остановить показ сообщения о опасности накручивания троса
-    void showTemperatureWarning(); //показ сообщения о перегрева ОЖ
-    void stopTemperatureWarning(); //остановить показ сообщения о перегрева ОЖ
-    void on__pushButtonSetTemperatureWarning_clicked(bool checked); //обработчик кнопки для показа сообщения о перегреве ОЖ
+    void on__pushButtonTemperatureWarning_clicked(bool checked);//обработчик кнопки для показа сообщения о перегреве ОЖ
     void on__verticalSliderScale_valueChanged(int value); //обработчик слайдера масштаба
     void on__pushButtonDebug_clicked();
     void on__pushButtonPower_clicked(bool checked); //обработчик кнопки для включения крана
     void on__pushButtonLight_clicked(bool checked); //обработчик кнопки для включения подсветки крана
+
+    //SoundSignal - кнопка подачи звукового сигнала
+    void on__pushButtonSoundSignal_pressed();
+    void on__pushButtonSoundSignal_released();
 
     //rope hooh - лебедка
     void on__pushButtonRopeHookPlus_clicked();
@@ -144,6 +151,9 @@ private slots:
     void on__pushButtonRightCrutchMinus_clicked();
     void on__verticalSliderRightCrutch_valueChanged(int value);
 
+
+
+
 private:
     Ui::CraneWidget *ui;
     Side::CrutchItem *_leftCrutch;
@@ -154,11 +164,14 @@ private:
     Side::TelescopicItem *_telescopic;
     Side::RopeHookItem *_ropeHook;
     Side::HookItem *_hook;
+    Side::LightItem *_lightOn;
+    Side::LightItem *_lampLight;
 
     Side::OtherItem *_ellipseDerrick;
     Side::EllipseOutriggerItem *_ellipseOutrigger;
     Side::EllipseHookItem *_ellipseHook;
     Side::OtherItem *_ground;
+    Top::OtherItem *_groundTop;
 
     QGraphicsEllipseItem *_itemEllipse;
     QGraphicsEllipseItem *_itemEllipseForDebug;
@@ -170,8 +183,10 @@ private:
     Top::DerrickItem *_derrickTop;
     Top::OutriggerItem *_outriggerTop;
     Top::TelescopicItem *_telescopicTop;
+    Top::LightItem *_lightOnTop;
 
     GraphicsScene *_sceneTop;
+    QSound *_soundSignal;
 
 };
 

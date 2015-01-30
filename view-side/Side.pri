@@ -8,6 +8,7 @@ SOURCES += $$PWD/Side_RopeHookItem.cpp \
     $$PWD/Side_EllipseOutriggerItem.cpp \
     $$PWD/Side_EllipseHookItem.cpp \
     $$PWD/Side_CrutchItem.cpp \
+    $$PWD/Side_LightItem.cpp
 
 HEADERS  += $$PUBLIC_HEADERS \
     $$PWD/Side_RopeHookItem.h \
@@ -19,4 +20,5 @@ HEADERS  += $$PUBLIC_HEADERS \
     $$PWD/Side_OtherItem.h \
     $$PWD/Side_EllipseOutriggerItem.h \
     $$PWD/Side_EllipseHookItem.h \
-    $$PWD/Side_CrutchItem.h
+    $$PWD/Side_CrutchItem.h \
+    $$PWD/Side_LightItem.h

@@ -16,7 +16,8 @@ public:
 
 public slots:
     void setPortSettings(QString, PortSettings);    //установка настроек порта
-    void sendMessage(Element el, quint8 mes);       //отправка данных в порт
+    void sendMessage(Element el, quint8 mes);       //отправка сигналов в порт
+    void writeInSocket(QByteArray &arr);            //отправка данных в порт
 
 signals:
     void receivedMessage(Element el, quint8 mes);

@@ -120,7 +120,7 @@ bool QextSerialPortPrivate::close_sys()
 
 bool QextSerialPortPrivate::flush_sys()
 {
-    ::tcdrain(fd);
+    //::tcdrain(fd); ///****
     return true;
 }
 

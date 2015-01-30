@@ -1,4 +1,4 @@
-QT       += core gui svg
+QT       += core gui svg multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -35,5 +35,7 @@ FORMS    += \
 
 RESOURCES += \
     resources.qrc
+
+win32:RC_FILE += file.rc
 
 QMAKE_LFLAGS += -static -static-libgcc

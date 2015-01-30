@@ -13,8 +13,12 @@
   <property name="windowTitle">
    <string>CraneEmulator</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/CraneIcon.svg</normaloff>:/CraneIcon.svg</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar">
+  <widget class="QMenuBar" name="_menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -23,9 +27,35 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="_menuSettings">
+    <property name="title">
+     <string>Settings</string>
+    </property>
+    <addaction name="actionSettings_port"/>
+   </widget>
+   <widget class="QMenu" name="_menuAbout">
+    <property name="title">
+     <string>About</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="_menuSettings"/>
+   <addaction name="_menuAbout"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionSettings_port">
+   <property name="text">
+    <string>Settings port</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

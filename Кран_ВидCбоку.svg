@@ -7,6 +7,7 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xml:space="preserve"
@@ -14,13 +15,13 @@
    height="257.84488"
    style="fill-rule:evenodd"
    viewBox="0 0 196.781 72.769556"
-   id="svg3026"
+   id="svg3040"
    version="1.1"
    inkscape:version="0.48.5 r10040"
    sodipodi:docname="Кран_ВидCбоку.svg"><metadata
-   id="metadata3065"><rdf:RDF><cc:Work
+   id="metadata3093"><rdf:RDF><cc:Work
        rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
-         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><sodipodi:namedview
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title /></cc:Work></rdf:RDF></metadata><sodipodi:namedview
    pagecolor="#ffffff"
    bordercolor="#666666"
    borderopacity="1"
@@ -29,53 +30,193 @@
    guidetolerance="10"
    inkscape:pageopacity="0"
    inkscape:pageshadow="2"
-   inkscape:window-width="640"
-   inkscape:window-height="480"
-   id="namedview3063"
+   inkscape:window-width="1920"
+   inkscape:window-height="1018"
+   id="namedview3091"
    showgrid="false"
    fit-margin-top="0"
    fit-margin-left="0"
    fit-margin-right="0"
    fit-margin-bottom="0"
-   inkscape:zoom="0.22425739"
-   inkscape:cx="318.42141"
-   inkscape:cy="136.19161"
-   inkscape:window-x="0"
-   inkscape:window-y="0"
-   inkscape:window-maximized="0"
-   inkscape:current-layer="svg3026" />
+   inkscape:zoom="2.1528426"
+   inkscape:cx="434.39127"
+   inkscape:cy="114.11832"
+   inkscape:window-x="-8"
+   inkscape:window-y="-8"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Слой_x0020_1" />
  <defs
-   id="defs3028">
+   id="defs3042">
   <style
    type="text/css"
-   id="style3030">
+   id="style3044">
    
-    .str0 {stroke:#1F1A17;stroke-width:0.0762}
-    .str2 {stroke:#1F1A17;stroke-width:0.2}
-    .str1 {stroke:#1F1A17;stroke-width:0.25}
-    .str3 {stroke:#1F1A17;stroke-width:0.5}
-    .fil1 {fill:#1F1A17}
-    .fil0 {fill:#605D5C}
-    .fil3 {fill:#8F5444}
-    .fil2 {fill:#957F66}
-    .fil4 {fill:#B2B2B2}
+    .str4 {stroke:#1F1A17;stroke-width:0.0762}
+    .str0 {stroke:#0A0B0C;stroke-width:0.1}
+    .str6 {stroke:#1F1A17;stroke-width:0.2}
+    .str1 {stroke:#383431;stroke-width:0.2}
+    .str3 {stroke:#FFF500;stroke-width:0.2}
+    .str2 {stroke:#FBF6D7;stroke-width:0.2;stroke-opacity:0.501961}
+    .str5 {stroke:#1F1A17;stroke-width:0.25}
+    .str7 {stroke:#1F1A17;stroke-width:0.5}
+    .fil4 {fill:#1F1A17}
+    .fil1 {fill:#383431}
+    .fil3 {fill:#605D5C}
+    .fil6 {fill:#8F5444}
+    .fil5 {fill:#957F66}
+    .fil0 {fill:#FFF500}
+    .fil7 {fill:#B2B2B2}
+    .fil2 {fill:url(#id0);fill-opacity:0.501961}
    
   </style>
- </defs>
+  <linearGradient
+   id="id0"
+   gradientUnits="userSpaceOnUse"
+   x1="170.565"
+   y1="119.865"
+   x2="169.96201"
+   y2="180.185"
+   gradientTransform="translate(15.134402,114.16674)">
+   <stop
+   offset="0"
+   style="stop-color:#F3E52E"
+   id="stop3047" />
+   <stop
+   offset="0.0117647"
+   style="stop-color:#F6EA77"
+   id="stop3049" />
+   <stop
+   offset="1"
+   style="stop-color:#F8EFC1"
+   id="stop3051" />
+  </linearGradient>
+ <radialGradient
+   inkscape:collect="always"
+   xlink:href="#linearGradient5467"
+   id="radialGradient5491"
+   cx="172.52531"
+   cy="133.18765"
+   fx="172.52531"
+   fy="133.18765"
+   r="20.252048"
+   gradientTransform="matrix(-1.4785379,0.00150661,-0.00342328,-3.3595617,426.16753,554.39494)"
+   gradientUnits="userSpaceOnUse" /><linearGradient
+   id="linearGradient5467"
+   gradientUnits="userSpaceOnUse"
+   x1="170.565"
+   y1="119.865"
+   x2="169.96201"
+   y2="180.185"
+   gradientTransform="translate(15.134402,114.16674)"><stop
+     offset="0"
+     style="stop-color:#ffff00;stop-opacity:1;"
+     id="stop5469" /><stop
+     id="stop5493"
+     style="stop-color:#faf43b;stop-opacity:1;"
+     offset="0.19385976" /><stop
+     offset="0.88372821"
+     style="stop-color:#F6EA77"
+     id="stop5471" /><stop
+     offset="1"
+     style="stop-color:#F8EFC1"
+     id="stop5473" /></linearGradient><linearGradient
+   inkscape:collect="always"
+   xlink:href="#id0-4"
+   id="linearGradient3979"
+   x1="151.0871"
+   y1="149.1106"
+   x2="192.30382"
+   y2="148.96805"
+   gradientUnits="userSpaceOnUse" /><linearGradient
+   gradientTransform="translate(15.134402,114.16674)"
+   y2="180.185"
+   x2="169.96201"
+   y1="119.865"
+   x1="170.565"
+   gradientUnits="userSpaceOnUse"
+   id="id0-4"><stop
+     id="stop3047-9"
+     style="stop-color:#F3E52E"
+     offset="0" /><stop
+     id="stop3049-4"
+     style="stop-color:#F6EA77"
+     offset="0.0117647" /><stop
+     id="stop3051-6"
+     style="stop-color:#F8EFC1"
+     offset="1" /></linearGradient><filter
+   color-interpolation-filters="sRGB"
+   inkscape:collect="always"
+   id="filter5507"><feGaussianBlur
+     inkscape:collect="always"
+     stdDeviation="1.4573759"
+     id="feGaussianBlur5509" /></filter>
+   
+   
+  <radialGradient
+   inkscape:collect="always"
+   xlink:href="#linearGradient5467"
+   id="radialGradient5712"
+   gradientUnits="userSpaceOnUse"
+   gradientTransform="matrix(-1.4785374,0.00191648,-0.00342328,-2.6410515,489.04678,504.03827)"
+   cx="215.50053"
+   cy="144.7361"
+   fx="215.50053"
+   fy="144.7361"
+   r="20.252048" /></defs>
  <g
    id="Слой_x0020_1"
    transform="translate(-15.134402,-114.16674)">
   <metadata
    id="CorelCorpID_0Corel-Layer" />
+   
+ <g
+   id="lamp" >
+  <ellipse
+   d="m 172.5781,119.269 c 0,0.50442 -0.90264,0.91334 -2.0161,0.91334 -1.11346,0 -2.0161,-0.40892 -2.0161,-0.91334 0,-0.50443 0.90264,-0.91335 2.0161,-0.91335 1.11346,0 2.0161,0.40892 2.0161,0.91335 z"
+   style="fill:#fff500;stroke:#0a0b0c;stroke-width:0.1"
+   sodipodi:ry="0.91334599"
+   sodipodi:rx="2.0160999"
+   sodipodi:cy="119.269"
+   sodipodi:cx="170.562"
+   ry="0.91334599"
+   rx="2.0160999"
+   cy="119.269"
+   cx="170.562"
+   class="fil0 str0"
+   id="_236598672"
+   transform="translate(-0.52437133,0.26218569)" />
+   <path
+   style="fill:#383431;stroke:#383431;stroke-width:0.2"
+   inkscape:connector-curvature="0"
+   d="m 167.99463,119.78219 c 1.3918,-0.0203 2.7837,-0.0408 4.1756,-0.0612 -0.0572,-0.7952 0.0145,-2.0648 -2.2308,-1.9887 -2.0207,-0.0552 -1.8972,1.2038 -1.9448,2.0499 z"
+   class="fil1 str1"
+   id="_lamp01" />
+   </g>
+   
+   <g
+   id="lightOn"
+   inkscape:label="#lightOn"
+   style="stroke:none">
+   <path
+     inkscape:label="#light"
+     style="opacity:0.58407078000000001;fill:url(#radialGradient5712);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.20009556000000001;stroke-miterlimit:4;stroke-opacity:0.50196078000000000;stroke-dasharray:none;filter:url(#filter5507)"
+     inkscape:connector-curvature="0"
+     d="m 167.50012,120.44643 c -5.8116,19.7483 -11.6232,37.00584 -17.4349,56.75414 15.7154,4.5614 24.01842,4.84649 40.304,0 -6.2655,-19.7682 -11.21997,-37.17673 -17.48537,-56.94493 -1.3576,0.0199 -4.02613,0.17089 -5.38373,0.19079 z"
+     class="fil2 str2"
+     id="light"
+     inkscape:transform-center-y="-3.563591"
+     sodipodi:nodetypes="ccccc" />
+	 </g>
+  
   <path
    id="hook"
-   class="fil0 str0"
+   class="fil3 str4"
    d="m 178.275,128.791 c -0.0243,0.3505 -0.017,1.8041 0.0793,2.1327 0.144,0.3161 0.468,0.4817 0.7446,0.7008 0.3526,0.3375 0.2886,0.7575 0.219,1.095 -0.1074,0.3582 -0.4013,0.6503 -0.7008,0.7446 -0.429,0.0807 -0.6826,0.002 -1.0074,-0.0876 -0.8768,-0.38 -0.5988,-0.9787 -0.2954,-1.2486 -0.6224,-0.1204 -0.8285,0.4373 -0.7151,0.9758 0.068,0.323 0.2381,0.6282 0.4684,0.8479 0.3864,0.2571 0.7802,0.4989 1.5495,0.3447 0.5019,-0.1413 1.2615,-0.4475 1.4892,-1.1826 0.1207,-0.4433 0.1372,-0.9801 -0.1314,-1.4454 -0.1732,-0.3049 -0.5383,-0.5054 -0.9199,-0.7498 -0.287,-0.3229 -0.0907,-1.8004 -0.1476,-2.1346 -0.1324,0 -0.5,0.007 -0.6324,0.007 z"
    inkscape:connector-curvature="0"
    style="fill:#605d5c;stroke:#1f1a17;stroke-width:0.0762" />
   <rect
    id="rope_hook"
-   class="fil1 str1"
+   class="fil4 str5"
    x="178.386"
    y="126.952"
    width="0.39719999"
@@ -84,20 +225,20 @@
   <g
    id="telescopic">
    <path
-   id="_131819176"
-   class="fil2 str0"
+   id="_236595624"
+   class="fil5 str4"
    d="m 176.801,120.773 c 0.8043,0.0307 3.9027,-0.0658 3.9027,-0.0658 -0.1754,1.4909 -0.4824,3.0921 -0.6578,4.583 -0.9063,-0.0585 -1.7906,0.0149 -2.6968,-0.0435 -0.1754,-1.374 -0.3727,-3.0997 -0.5481,-4.4737 z"
    inkscape:connector-curvature="0"
    style="fill:#957f66;stroke:#1f1a17;stroke-width:0.0762" />
    <path
-   id="_131819104"
-   class="fil2 str0"
+   id="_236595552"
+   class="fil5 str4"
    d="m 130.71,118.98 c 4.5735,-0.0584 38.097,-0.6256 42.6705,-0.6841 1.1108,0.7016 2.3094,1.7754 3.4203,2.477 1.315,0.0919 2.6575,-0.0434 3.9027,-0.0658 1.3872,-1.9587 1.4442,-4.0333 0.7712,-5.8774 l -51.0269,-0.3122 0.2622,4.4625 z"
    inkscape:connector-curvature="0"
    style="fill:#957f66;stroke:#1f1a17;stroke-width:0.0762" />
    <path
-   id="_131819032"
-   class="fil3 str0"
+   id="_236595480"
+   class="fil6 str4"
    d="m 130.448,114.518 0.2622,4.4625 31.4659,-0.508 c 1.89,-1.025 -0.728,-2.5222 -1.0933,-3.767 L 130.448,114.518 z"
    inkscape:connector-curvature="0"
    style="fill:#8f5444;stroke:#1f1a17;stroke-width:0.0762" />
@@ -105,8 +246,8 @@
   <g
    id="ellipse_hook">
    <ellipse
-   id="_131818936"
-   class="fil3 str0"
+   id="_236595384"
+   class="fil6 str4"
    cx="178.564"
    cy="125.818"
    rx="1.5675"
@@ -118,8 +259,8 @@
    style="fill:#8f5444;stroke:#1f1a17;stroke-width:0.0762"
    d="m 180.1315,125.818 c 0,0.81402 -0.7018,1.47392 -1.5675,1.47392 -0.86571,0 -1.5675,-0.6599 -1.5675,-1.47392 0,-0.81402 0.70179,-1.47392 1.5675,-1.47392 0.8657,0 1.5675,0.6599 1.5675,1.47392 z" />
    <ellipse
-   id="_131818888"
-   class="fil1 str2"
+   id="_236595336"
+   class="fil4 str6"
    cx="178.564"
    cy="125.818"
    rx="0.62249702"
@@ -133,21 +274,21 @@
   </g>
   <path
    id="outrigger"
-   class="fil2 str0"
+   class="fil5 str4"
    d="m 127.305,120.242 c 0.3307,0.1506 1.5107,0.4189 2.7668,-0.6558 l 29.8179,-0.5216 c 1.7805,-1.5638 -1.0851,-3.5822 -2.1801,-4.6208 l -29.2485,0 c -0.6273,0.075 -2.3488,0.9994 -2.817,1.8971 l -1.4242,2.668 3.0851,1.2331 z"
    inkscape:connector-curvature="0"
    style="fill:#957f66;stroke:#1f1a17;stroke-width:0.0762" />
   <path
    id="derrick"
-   class="fil2 str0"
+   class="fil5 str4"
    d="m 54.477,123.558 c 0.7184,-0.0206 3.4537,-0.0836 4.1749,-0.104 22.3654,-0.6344 46.1539,-1.2001 68.4244,-1.8394 1.3871,-1.8705 -2.9664,-3.2557 -3.8141,-4.6005 -20.7551,0.0598 -49.4284,-0.0257 -70.7441,-0.2622 -1.709,-0.0189 -4.4391,0.192 -5.6904,2.4741 l -1.7916,3.4665 2.9916,2.6723 c 1.0993,0.2071 4.9828,-1.6806 6.4493,-1.8068 z"
    inkscape:connector-curvature="0"
    style="fill:#957f66;stroke:#1f1a17;stroke-width:0.0762" />
   <g
    id="ellipse_outrigger">
    <ellipse
-   id="_131818504"
-   class="fil3 str0"
+   id="_236594952"
+   class="fil6 str4"
    cx="124.22"
    cy="119.009"
    rx="5.10919"
@@ -159,8 +300,8 @@
    style="fill:#8f5444;stroke:#1f1a17;stroke-width:0.0762"
    d="m 129.32919,119.009 c 0,2.65327 -2.28746,4.80416 -5.10919,4.80416 -2.82173,0 -5.10919,-2.15089 -5.10919,-4.80416 0,-2.65326 2.28746,-4.80416 5.10919,-4.80416 2.82173,0 5.10919,2.1509 5.10919,4.80416 z" />
    <ellipse
-   id="_131818456"
-   class="fil1 str2"
+   id="_236594904"
+   class="fil4 str6"
    cx="124.22"
    cy="119.009"
    rx="2.029"
@@ -175,48 +316,48 @@
   <g
    id="right_crutch">
    <rect
-   id="_131818312"
-   class="fil3 str0"
+   id="_236594760"
+   class="fil6 str4"
    x="64.159698"
    y="138.95"
    width="3.0518"
    height="16.4739"
    style="fill:#8f5444;stroke:#1f1a17;stroke-width:0.0762" />
    <rect
-   id="_131717552"
-   class="fil1 str3"
+   id="_236594688"
+   class="fil4 str7"
    x="63.091"
    y="155.358"
    width="5.1092"
    height="15.413"
    style="fill:#1f1a17;stroke:#1f1a17;stroke-width:0.5" />
    <polygon
-   id="_131717504"
-   class="fil1 str2"
+   id="_236594640"
+   class="fil4 str6"
    points="65.6456,172.01 63.091,172.01 64.3683,170.811 65.6456,169.612 66.9229,170.811 68.2002,172.01 "
    style="fill:#1f1a17;stroke:#1f1a17;stroke-width:0.2" />
   </g>
   <g
    id="left_crutch">
    <rect
-   id="_131717360"
-   class="fil3 str0"
+   id="_236594496"
+   class="fil6 str4"
    x="24.0972"
    y="138.95"
    width="3.0954001"
    height="16.4739"
    style="fill:#8f5444;stroke:#1f1a17;stroke-width:0.0762" />
    <rect
-   id="_131717288"
-   class="fil1 str3"
+   id="_236594424"
+   class="fil4 str7"
    x="23.1735"
    y="155.356"
    width="4.9954"
    height="15.413"
    style="fill:#1f1a17;stroke:#1f1a17;stroke-width:0.5" />
    <polygon
-   id="_131717240"
-   class="fil1 str2"
+   id="_236594376"
+   class="fil4 str6"
    points="25.6712,172.01 23.1735,172.01 24.4223,170.811 25.6712,169.612 26.92,170.811 28.1689,172.01 "
    style="fill:#1f1a17;stroke:#1f1a17;stroke-width:0.2" />
   </g>
@@ -224,13 +365,13 @@
    id="pillar">
    <path
    id="main_pillar"
-   class="fil2 str0"
+   class="fil5 str4"
    d="m 23.1735,153.896 c 0.7384,0 4.257,0 4.9954,0 l 1.3702,-1.5563 32.4862,0 1.0657,1.5563 c 0.7384,0 4.329,0 5.0674,0 0.028,-5.396 0.0137,-10.7018 0.0418,-16.0979 l -5.102,0 -0.0144,6.9642 -13.0235,0 -2.5121,-3.0161 -5.0242,0 -2.4983,3.0161 c -4.0588,-0.0292 -7.798,0.0292 -11.8568,0 l 0,-6.9642 -4.9954,0 0,16.0979 z"
    inkscape:connector-curvature="0"
    style="fill:#957f66;stroke:#1f1a17;stroke-width:0.0762" />
    <rect
    id="up_pillar"
-   class="fil3 str0"
+   class="fil6 str4"
    x="39.986599"
    y="125.546"
    width="10.0737"
@@ -240,8 +381,8 @@
   <g
    id="ellipse_derrick">
    <ellipse
-   id="_131716784"
-   class="fil3 str0"
+   id="_236593920"
+   class="fil6 str4"
    cx="45.036098"
    cy="122.693"
    rx="6.47509"
@@ -253,8 +394,8 @@
    style="fill:#8f5444;stroke:#1f1a17;stroke-width:0.0762"
    d="m 51.511189,122.693 c 0,3.3626 -2.898997,6.08852 -6.475091,6.08852 -3.576093,0 -6.47509,-2.72592 -6.47509,-6.08852 0,-3.3626 2.898997,-6.08852 6.47509,-6.08852 3.576094,0 6.475091,2.72592 6.475091,6.08852 z" />
    <ellipse
-   id="_131716736"
-   class="fil1 str2"
+   id="_236593872"
+   class="fil4 str6"
    cx="45.036098"
    cy="122.693"
    rx="2.57143"
@@ -268,7 +409,7 @@
   </g>
   <rect
    id="ground"
-   class="fil4"
+   class="fil7"
    x="15.1344"
    y="178.763"
    width="196.78101"

@@ -37,6 +37,7 @@ private slots:
     void sendTemperatureNormal();
     void sendHookIsWarning();
     void sendHookIsNormal();
+    void on_actionAbout_triggered();                    //показ О программе
 };
 
 #endif // MAINWINDOW_H

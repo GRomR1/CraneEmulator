@@ -43,33 +43,26 @@
          </widget>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
-          <item>
-           <widget class="QPushButton" name="_pushButtonTemperatureWarning">
-            <property name="text">
-             <string>Temperature Warning</string>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="_pushButtonSetTemperatureWarning">
-            <property name="text">
-             <string>Set</string>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <widget class="QPushButton" name="_pushButtonTemperatureWarning">
+          <property name="text">
+           <string>Temperature Warning off</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="_pushButtonSoundSignal">
+          <property name="text">
+           <string>Sound</string>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QPushButton" name="_pushButtonLight">
           <property name="text">
-           <string>Light</string>
+           <string>Light off</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -79,7 +72,7 @@
         <item>
          <widget class="QPushButton" name="_pushButtonPower">
           <property name="text">
-           <string>Power</string>
+           <string>Power off</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -92,7 +85,7 @@
         <item>
          <widget class="QPushButton" name="_pushButtonDebug">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="text">
            <string>!!!</string>

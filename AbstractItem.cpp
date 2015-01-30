@@ -67,27 +67,6 @@ void AbstractItem::setParentItemMy(AbstractItem *item)
 
     setBasicPos(_parentItem->mapFromScene(pos()));
 }
-//void AbstractItem::increment(int value)
-//{
-//    if(value < 0)
-//    {
-//        decrement(qAbs(value));
-//        return;
-//    }
-//    for(int i=0; i<value; i++)
-//        increment();
-//}
-
-//void AbstractItem::decrement(int value)
-//{
-//    if(value < 0)
-//    {
-//        increment(qAbs(value));
-//        return;
-//    }
-//    for(int i=0; i<value; i++)
-//        decrement();
-//}
 
 void AbstractItem::setValue(qreal v)
 {

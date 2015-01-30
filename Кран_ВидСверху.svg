@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<!-- Creator: CorelDRAW -->
 
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -9,15 +9,18 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   version="1.1"
-   width="500.23111"
-   height="254.25142"
-   viewBox="0 0 141.17634 71.755402"
-   id="svg3324"
    xml:space="preserve"
+   width="653.77203"
+   height="329.08005"
    style="fill-rule:evenodd"
+   viewBox="0 0 184.509 92.873704"
+   id="svg3023"
+   version="1.1"
    inkscape:version="0.48.5 r10040"
-   sodipodi:docname="Кран_ВидСверху.svg"><sodipodi:namedview
+   sodipodi:docname="Кран_ВидСверху.svg"><metadata
+   id="metadata3059"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><sodipodi:namedview
    pagecolor="#ffffff"
    bordercolor="#666666"
    borderopacity="1"
@@ -28,94 +31,182 @@
    inkscape:pageshadow="2"
    inkscape:window-width="640"
    inkscape:window-height="480"
-   id="namedview3097"
+   id="namedview3057"
    showgrid="false"
    fit-margin-top="0"
    fit-margin-left="0"
    fit-margin-right="0"
    fit-margin-bottom="0"
    inkscape:zoom="0.22425739"
-   inkscape:cx="312.03956"
-   inkscape:cy="-98.287075"
+   inkscape:cx="334.42865"
+   inkscape:cy="-62.560974"
    inkscape:window-x="0"
    inkscape:window-y="0"
    inkscape:window-maximized="0"
-   inkscape:current-layer="svg3324" /><metadata
-   id="metadata3347"><rdf:RDF><cc:Work
-       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
-         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title /></cc:Work></rdf:RDF></metadata>
+   inkscape:current-layer="svg3023" />
  <defs
-   id="defs3326">
+   id="defs3025">
   <style
    type="text/css"
-   id="style3328" />
+   id="style3027">
+   
+    .str1 {stroke:#1F1A17;stroke-width:0.0762}
+    .str0 {stroke:#F7EEAA;stroke-width:0.2;stroke-opacity:0.501961}
+    .fil4 {fill:none}
+    .fil5 {fill:#8F5444}
+    .fil3 {fill:#957F66}
+    .fil1 {fill:white}
+    .fil0 {fill:#B2B2B2}
+    .fil2 {fill:url(#id0);fill-opacity:0.501961}
+   
+  </style>
+  <radialGradient
+   id="id0"
+   gradientUnits="userSpaceOnUse"
+   cx="147.396"
+   cy="85.223602"
+   r="27.148399"
+   fx="147.396"
+   fy="85.223602"
+   gradientTransform="translate(10.616802,37.9702)">
+   <stop
+   offset="0"
+   style="stop-color:#F7E34A"
+   id="stop3030" />
+   <stop
+   offset="0.388235"
+   style="stop-color:#F7E986"
+   id="stop3032" />
+   <stop
+   offset="1"
+   style="stop-color:#F8EFC1"
+   id="stop3034" />
+  </radialGradient>
  </defs>
  <g
    id="Слой_x0020_1"
-   transform="translate(-16.935502,-49.0058)">
+   transform="translate(-10.616802,-37.9702)">
   <metadata
    id="CorelCorpID_0Corel-Layer" />
   <g
+   id="ground">
+   <rect
+   id="_105389432"
+   class="fil0"
+   x="10.6168"
+   y="37.9702"
+   width="184.509"
+   height="92.873703"
+   style="fill:#b2b2b2" />
+   <rect
+   id="_105389360"
+   class="fil1"
+   x="10.6168"
+   y="81.503998"
+   width="13.0905"
+   height="5.8060699"
+   style="fill:#ffffff" />
+   <rect
+   id="_105389288"
+   class="fil1"
+   x="49.2654"
+   y="81.504501"
+   width="38.810101"
+   height="5.8060699"
+   style="fill:#ffffff" />
+   <rect
+   id="_105389216"
+   class="fil1"
+   x="109.519"
+   y="81.727798"
+   width="38.810101"
+   height="5.8060699"
+   style="fill:#ffffff" />
+   <rect
+   id="_105389144"
+   class="fil1"
+   x="169.314"
+   y="81.727798"
+   width="25.8118"
+   height="5.8060699"
+   style="fill:#ffffff" />
+  </g>
+  <path
+   id="light_on"
+   class="fil2 str0"
+   d="m 147.396,58.0752 c 14.991,0 27.1483,12.1573 27.1483,27.1484 0,14.991 -12.1573,27.1483 -27.1483,27.1483 -14.9911,0 -27.1484,-12.1573 -27.1484,-27.1483 0,-14.9911 12.1573,-27.1484 27.1484,-27.1484 z"
+   inkscape:connector-curvature="0"
+   style="fill:url(#id0);fill-opacity:0.50196084;stroke:#f7eeaa;stroke-width:0.2;stroke-opacity:0.50196084" />
+  <g
    id="pillar">
    <rect
-   width="7.9338002"
-   height="71.650902"
+   id="_105388880"
+   class="fil3 str1"
    x="17.9368"
    y="49.072201"
-   id="_213816392"
+   width="7.9338002"
+   height="71.650902"
    style="fill:#957f66;stroke:#1f1a17;stroke-width:0.0762" />
    <rect
-   width="7.9338002"
-   height="7.0159998"
+   id="_105388808"
+   class="fil4 str1"
    x="17.9368"
    y="113.707"
-   id="_213815360"
-   style="fill:none;stroke:#1f1a17;stroke-width:0.0762" />
-   <rect
    width="7.9338002"
    height="7.0159998"
+   style="fill:none;stroke:#1f1a17;stroke-width:0.0762" />
+   <rect
+   id="_105388736"
+   class="fil4 str1"
    x="17.9366"
    y="49.0439"
-   id="_213813776"
+   width="7.9338002"
+   height="7.0159998"
    style="fill:none;stroke:#1f1a17;stroke-width:0.0762" />
   </g>
   <rect
-   width="9.8224001"
-   height="16.0898"
+   id="rect_pillar"
+   class="fil5 str1"
    x="16.9736"
    y="76.852303"
-   id="rect_pillar"
+   width="9.8224001"
+   height="16.0898"
    style="fill:#8f5444;stroke:#1f1a17;stroke-width:0.0762" />
   <g
    id="derrick">
    <path
+   id="_105388520"
+   class="fil3 str1"
    d="m 24.5965,79.8214 c -3.7568,2.517 -3.4239,8.0401 0,10.1616 l 75.7607,0 -2e-4,-10.1593 -75.7605,-0.0023 z"
-   id="_213815048"
-   style="fill:#957f66;stroke:#1f1a17;stroke-width:0.0762"
-   inkscape:connector-curvature="0" />
+   inkscape:connector-curvature="0"
+   style="fill:#957f66;stroke:#1f1a17;stroke-width:0.0762" />
    <path
+   id="_105388448"
+   class="fil5 str1"
    d="m 97.2559,79.8214 c -2.8013,2.517 -2.5531,8.0401 0,10.1616 l 5.8872,0 0,-10.1615 -5.8872,-1e-4 z"
-   id="_213816296"
-   style="fill:#8f5444;stroke:#1f1a17;stroke-width:0.0762"
-   inkscape:connector-curvature="0" />
+   inkscape:connector-curvature="0"
+   style="fill:#8f5444;stroke:#1f1a17;stroke-width:0.0762" />
   </g>
   <g
    id="telescopic">
    <path
+   id="_32367384"
+   class="fil3 str1"
    d="m 103.143,80.8255 53.5405,0 c 1.8602,0 1.8471,8.1575 0,8.1575 l -53.5405,-1e-4 0,-8.1574 z"
-   id="_213814376"
-   style="fill:#957f66;stroke:#1f1a17;stroke-width:0.0762"
-   inkscape:connector-curvature="0" />
+   inkscape:connector-curvature="0"
+   style="fill:#957f66;stroke:#1f1a17;stroke-width:0.0762" />
    <path
+   id="_32366136"
+   class="fil5 str1"
    d="m 135.655,88.983 c 2.2191,-1.9816 1.9946,-6.4177 0,-8.1575 l -32.5118,10e-5 -10e-5,8.1574 32.5119,0 z"
-   id="_213813296"
-   style="fill:#8f5444;stroke:#1f1a17;stroke-width:0.0762"
-   inkscape:connector-curvature="0" />
+   inkscape:connector-curvature="0"
+   style="fill:#8f5444;stroke:#1f1a17;stroke-width:0.0762" />
   </g>
   <path
-   d="m 104.598,79.8215 29.2485,0 c 2.0393,0.0214 1.9429,10.1616 0,10.1616 l -29.2485,-5e-4 0,-10.1611 z m -1.4554,-1e-4 c -3.6669,2.4972 -3.4252,8.0214 0,10.1617 l 1.4554,-5e-4 0,-10.1611 -1.4554,-1e-4 z"
    id="outrigger"
-   style="fill:#957f66;stroke:#1f1a17;stroke-width:0.0762"
-   inkscape:connector-curvature="0" />
+   class="fil3 str1"
+   d="m 104.598,79.8215 29.2485,0 c 2.0393,0.0214 1.9429,10.1616 0,10.1616 l -29.2485,-5e-4 0,-10.1611 z m -1.4554,-1e-4 c -3.6669,2.4972 -3.4252,8.0214 0,10.1617 l 1.4554,-5e-4 0,-10.1611 -1.4554,-1e-4 z"
+   inkscape:connector-curvature="0"
+   style="fill:#957f66;stroke:#1f1a17;stroke-width:0.0762" />
  </g>
 </svg>

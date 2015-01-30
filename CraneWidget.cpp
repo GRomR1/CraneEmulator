@@ -17,14 +17,19 @@ CraneWidget::CraneWidget(QWidget *parent) :
 
 //    qDebug() << renderer->elementExists("pillar") << renderer->elementExists("hook") << "";
 //    qDebug() << renderer->boundsOnElement("pillar").topLeft() << renderer->boundsOnElement("hook").topLeft();
+    _groundTop = new Top::OtherItem(AbstractItems::Ground, rendererTop);
+    _groundTop->setId("ground");
+    _groundTop->setZValue(-1.0);
+    _sceneTop->addItem(_groundTop);
+
     _leftCrutch = new Side::CrutchItem(AbstractItems::LeftCrutch, renderer);
-    _leftCrutch->setMax(10);
+    _leftCrutch->setMax(6.8);
     _leftCrutch->setCountSteps(5*multiplier);
     ui->_verticalSliderLeftCrutch->setMaximum(5*multiplier);
     ui->_verticalSliderLeftCrutch->setSingleStep(1);
 
     _rightCrutch = new Side::CrutchItem(AbstractItems::RightCrutch, renderer);
-    _rightCrutch->setMax(10);
+    _rightCrutch->setMax(6.8);
     _rightCrutch->setCountSteps(5*multiplier);
     ui->_verticalSliderRightCrutch->setMaximum(5*multiplier);
     ui->_verticalSliderRightCrutch->setSingleStep(1);
@@ -78,10 +83,12 @@ CraneWidget::CraneWidget(QWidget *parent) :
     _outrigger->setCountSteps(15*multiplier);
     _outrigger->setParentItemMy(_ellipseOutrigger);
     _outriggerTop = new Top::OutriggerItem(rendererTop);
+//    _outriggerTop->setFlags(QGraphicsItem::ItemStacksBehindParent);
     _outriggerTop->setMax(0);
     _outriggerTop->setMin(-30);
     _outriggerTop->setCountSteps(15*multiplier);
     _outriggerTop->setParentItemMy(_derrickTop);
+    _outriggerTop->setZValue(1.0);
     _sceneTop->addItem(_outriggerTop);
     ui->_verticalSliderOutrigger->setMaximum(15*multiplier);
     ui->_verticalSliderOutrigger->setValue(15*multiplier);
@@ -98,7 +105,7 @@ CraneWidget::CraneWidget(QWidget *parent) :
     _telescopic->setParentItemMy(_outrigger);
 
     _telescopicTop = new Top::TelescopicItem(rendererTop);
-    _telescopicTop->setFlags(QGraphicsItem::ItemStacksBehindParent);
+//    _telescopicTop->setFlags(QGraphicsItem::ItemStacksBehindParent);
     _telescopicTop->setMax(20);
     _telescopicTop->setMin(0);
     _telescopicTop->setCountSteps(10*multiplier);
@@ -107,12 +114,8 @@ CraneWidget::CraneWidget(QWidget *parent) :
 
     _ellipseHook = new Side::EllipseHookItem(renderer);
     _ellipseHook->setParentItemMy(_telescopic);
-//    connect(_ellipseHook, SIGNAL(needDrawPoint(QPointF)),
-//            this, SLOT(drawPoint(QPointF)));
 
     _ropeHook = new Side::RopeHookItem(renderer);
-//    _ropeHook->setFlags(QGraphicsItem::ItemStacksBehindParent |
-//                        QGraphicsItem::ItemSendsGeometryChanges);
     _ropeHook->setParentItemMy(_ellipseHook);
     _ropeHook->setMax(51);
     _ropeHook->setMin(1);
@@ -131,8 +134,25 @@ CraneWidget::CraneWidget(QWidget *parent) :
     _ground = new Side::OtherItem(AbstractItems::Ground, renderer);
     _ground->setId("ground");
 
+    _lightOn = new Side::LightItem(AbstractItems::LightOn, renderer);
+    _lightOn->setFlags(QGraphicsItem::ItemStacksBehindParent);
+    _lightOn->setParentItemMy(_telescopic);
+    _lightOnTop = new Top::LightItem(rendererTop);
+//    _lightOnTop->setFlags(QGraphicsItem::ItemStacksBehindParent);
+    _lightOnTop->setParentItemMy(_telescopicTop);
+    _lightOnTop->setZValue(-0.5);
+    _sceneTop->addItem(_lightOnTop);
+    _lightOn->setVisible(false);
+    _lightOnTop->setVisible(false);
+
+    _lampLight = new Side::LightItem(AbstractItems::LampLight, renderer);
+    _lampLight->setFlags(QGraphicsItem::ItemStacksBehindParent);
+    _lampLight->setParentItemMy(_telescopic);
+
     _scene->addItem(_leftCrutch);
     _scene->addItem(_rightCrutch);
+    _scene->addItem(_lightOn);
+    _scene->addItem(_lampLight);
     _scene->addItem(_ropeHook);
     _scene->addItem(_hook);
     _scene->addItem(_telescopic);
@@ -158,6 +178,11 @@ CraneWidget::CraneWidget(QWidget *parent) :
     _sceneTop->setSceneRect(rect2);
     _sceneTop->addRect(_sceneTop->sceneRect(), QPen(Qt::green));
     ui->_viewTop->setScene(_sceneTop);
+    qreal scaleGroundX = rect2.width() / _groundTop->boundingRect().width();
+    QTransform t;
+    t.scale(scaleGroundX,1);
+    _groundTop->setTransform(t);
+    _groundTop->setPos(rect2.x(), rendererTop->boundsOnElement("ground").topLeft().y());
 
 //    _scene->addLine(QLineF(0, 0, 300, 0), QPen(Qt::green, 0.5)); //horizontal (y1==y2)
 //    _scene->addLine(QLineF(0, 0, 0, 200), QPen(Qt::green, 0.5)); //vertical (x1==x2)
@@ -176,6 +201,10 @@ CraneWidget::CraneWidget(QWidget *parent) :
 
     QString str = ui->_labelClientInfo->text();
     ui->_labelClientInfo->setText("<FONT COLOR = RED>"+str+"</FONT>");
+
+
+    _soundSignal = new QSound(":/sound1.wav");
+    _soundSignal->setLoops(QSound::Infinite);
 }
 
 CraneWidget::~CraneWidget()
@@ -186,24 +215,52 @@ CraneWidget::~CraneWidget()
 void CraneWidget::powerOn(bool b)
 {
     if(b)
+    {
         ui->_pushButtonPower->setStyleSheet("color: green;  font-weight: bold");
+#ifdef TURN_IMMEDIATELY
+        ui->_pushButtonPower->click();
+#endif
+    }
     else
+    {
         ui->_pushButtonPower->setStyleSheet("color: black;  font-weight: normal");
+#ifdef TURN_IMMEDIATELY
+        ui->_pushButtonPower->click();
+#endif
+    }
 
 }
 
 void CraneWidget::lightOn(bool b)
 {
     if(b)
+    {
         ui->_pushButtonLight->setStyleSheet("color: green;  font-weight: bold");
+#ifdef TURN_IMMEDIATELY
+        ui->_pushButtonLight->click();
+#endif
+    }
     else
+    {
         ui->_pushButtonLight->setStyleSheet("color: black;  font-weight: normal");
+#ifdef TURN_IMMEDIATELY
+        ui->_pushButtonLight->click();
+#endif
+    }
 }
 
 void CraneWidget::soundSignalOn(bool b)
 {
-    Q_UNUSED(b);
-    //TODO
+    if(b)
+    {
+        ui->_pushButtonSoundSignal->setStyleSheet("color: red;  font-weight: bold");
+        _soundSignal->play();
+    }
+    else
+    {
+        ui->_pushButtonSoundSignal->setStyleSheet("color: black;  font-weight: normal");
+        _soundSignal->stop();
+    }
 }
 
 void CraneWidget::pillarUp(int value)
@@ -370,18 +427,6 @@ void CraneWidget::stopHookWarning()
     emit hookIsNormal();
 }
 
-void CraneWidget::showTemperatureWarning()
-{
-    ui->_pushButtonTemperatureWarning->setStyleSheet("color: red;  font-weight: bold");
-    emit temperatureHigh();
-}
-
-void CraneWidget::stopTemperatureWarning()
-{
-    ui->_pushButtonTemperatureWarning->setStyleSheet("color: black;  font-weight: normal");
-    emit temperatureNormal();
-}
-
 void CraneWidget::on__pushButtonDerrickRotatePlus_clicked()
 {
     QString mes("derrick +");
@@ -522,21 +567,6 @@ void CraneWidget::on__pushButtonPillarMinus_clicked()
     addText(mes);
 }
 
-
-void CraneWidget::on__pushButtonSetTemperatureWarning_clicked(bool checked)
-{
-    if(checked)
-    {
-        ui->_pushButtonSetTemperatureWarning->setText("Unset");
-        showTemperatureWarning();
-    }
-    else
-    {
-        ui->_pushButtonSetTemperatureWarning->setText("Set");
-        stopTemperatureWarning();
-    }
-}
-
 void CraneWidget::on__verticalSliderRopeHook_valueChanged(int value)
 {
     QString mes("hook set ");
@@ -623,11 +653,16 @@ void CraneWidget::on__verticalSliderLeftCrutch_valueChanged(int value)
 
 void CraneWidget::on__pushButtonDebug_clicked()
 {
-//    qreal min = _pillarTop->min();
-    qreal max = _pillarTop->max();
-    _pillarTop->setMax(180);
-    _pillarTop->increment();
-    _pillarTop->setMax(max);
+    if(_lightOn->isVisible())
+    {
+        _lightOn->setVisible(false);
+        _lightOnTop->setVisible(false);
+    }
+    else
+    {
+        _lightOn->setVisible(true);
+        _lightOnTop->setVisible(true);
+    }
 }
 
 
@@ -650,11 +685,41 @@ void CraneWidget::on__pushButtonLight_clicked(bool checked)
     if(checked)
     {
         ui->_pushButtonLight->setText("Light On");
+        _lightOn->setVisible(true);
+        _lightOnTop->setVisible(true);
         emit signalLightOn();
     }
     else
     {
         ui->_pushButtonLight->setText("Light Off");
+        _lightOn->setVisible(false);
+        _lightOnTop->setVisible(false);
         emit signalLightOff();
     }
+}
+
+void CraneWidget::on__pushButtonTemperatureWarning_clicked(bool checked)
+{
+    if(checked)
+    {
+        ui->_pushButtonTemperatureWarning->setText("Temperature Warning on");
+        ui->_pushButtonTemperatureWarning->setStyleSheet("color: red;  font-weight: bold");
+        emit temperatureHigh();
+    }
+    else
+    {
+        ui->_pushButtonTemperatureWarning->setText("Temperature Warning off");
+        ui->_pushButtonTemperatureWarning->setStyleSheet("color: black;  font-weight: normal");
+        emit temperatureNormal();
+    }
+}
+
+void CraneWidget::on__pushButtonSoundSignal_pressed()
+{
+    soundSignalOn(true);
+}
+
+void CraneWidget::on__pushButtonSoundSignal_released()
+{
+    soundSignalOn(false);
 }

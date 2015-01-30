@@ -30,11 +30,6 @@ void PortListener::connectPort()
     connect(_port, SIGNAL(readyRead()), this, SLOT(readSocket()));
     connect(_port, SIGNAL(aboutToClose()), this, SLOT(reportClose()));
     connect(_port, SIGNAL(dsrChanged(bool)), this, SLOT(reportDsr(bool)));
-
-//    if(!(_port->lineStatus() && LS_DSR))
-//    {
-//        QMessageBox::warning(0,tr("Предупреждение"),tr("Устройство не подключено"));
-//    }
 }
 
 void PortListener::readSocket()
@@ -130,10 +125,16 @@ void PortListener::sendMessage(Element el, quint8 mes)
     QByteArray  arrBlock;
     QDataStream out(&arrBlock, QIODevice::WriteOnly);
     out << quint8(el) << mes;
+    writeInSocket(arrBlock);
+}
 
-    qDebug() << "write to port: " << arrBlock.toHex();
-
-    _port->write( arrBlock.data(), arrBlock.size() );
+void PortListener::writeInSocket(QByteArray &arr)
+{
+    if(_port->isOpen()&&_port->isWritable())
+    {
+        qDebug() << "write to port: " << arr.toHex();
+        _port->write( arr.data(), arr.size() );
+    }
 }
 
 void PortListener::reportClose()
